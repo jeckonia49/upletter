@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %}
+  <!---->
+
+  <head>
+    <!--=============== basic  ===============-->
+    <meta charset="UTF-8" />
+    <title>{% block title %}{% endblock title %}</title>
+    <meta name="robots" content="index, follow" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <!--=============== css  ===============-->
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="{% static 'css/plugins.css' %}"
+    />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="{% static 'css/style.css' %}"
+    />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="{% static 'css/color.css' %}"
+    />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="{% static 'css/output.css' %}"
+    />
+
+    <!-- Place the first <script> tag in your HTML's <head> -->
+
+    <script
+      src="https://cdn.tiny.cloud/1/{{tinymce_api_key}}/tinymce/6/tinymce.min.js"
+      referrerpolicy="origin"
+    ></script>
+
+    <!--=============== favicons ===============-->
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
+
+    <style>
+      audio {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- main start  -->
+    <div id="main">
+      <!-- progress-bar  -->
+      <div class="progress-bar-wrap">
+        <div class="progress-bar color-bg"></div>
+      </div>
+      <!-- progress-bar end -->
+      <!-- header -->
+      {% include "(shared)/navbar/navbar.html" %}
+      <!-- /header -->
+
+      <!-- wrapper -->
+      <div id="wrapper">
+        <!--content-->
+        <div class="content">{% block content %}{% endblock content %}</div>
+        <!-- content  end-->
+        <!-- footer -->
+        {% include "(shared)/footer.html" %}
+        <!-- footer end-->
+        <div class="aside-panel">
+          <ul>
+            <li>
+              <a href="#"><i class="far fa-podium"></i><span>Politics</span></a>
+            </li>
+            <li>
+              <a href="#"><i class="far fa-atom"></i><span>Technology</span></a>
+            </li>
+            <li>
+              <a href="#"
+                ><i class="far fa-user-chart"></i><span>Business</span></a
+              >
+            </li>
+            <li>
+              <a href="#"
+                ><i class="far fa-tennis-ball"></i><span>Sports</span></a
+              >
+            </li>
+            <li>
+              <a href="#"><i class="far fa-flask"></i><span>Science</span></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- wrapper end -->
+      <!-- cookie-info-bar -->
+      <div class="cookie-info-bar" id="cookie-info-bar">
+        <div class="container">
+          <div class="cookie-info-bar_title">
+            <i class="fal fa-cookie"></i>Our site uses cookies. Learn more about
+            our use of cookies: <a href="#">Cookie policy</a>
+          </div>
+          <a href="#" class="sicb_btn color-bg">Accept</a>
+          <a href="#" class="sicb_btn">Reject</a>
+        </div>
+      </div>
+      <!-- cookie-info-bar end -->
+      <!--register form -->
+      <div class="main-register-container">
+        <div class="reg-overlay close-reg-form"></div>
+        <div class="main-register-holder">{% include "modals/auth.html" %}</div>
+      </div>
+      <!--register form end -->
+    </div>
+    <!-- Main end -->
+    <!--=============== scripts  ===============-->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/jdenticon@3.2.0/dist/jdenticon.min.js"
+      async
+      integrity="sha384-yBhgDqxM50qJV5JPdayci8wCfooqvhFYbIKhv0hTtLvfeeyJMJCscRfFNKIxt43M"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="{% static 'js/custom.js' %}"></script>
+    <script defer src="{% static 'js/dist/jdenticon.min.js' %}"></script>
+  </body>
+</html>

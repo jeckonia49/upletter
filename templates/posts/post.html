@@ -1,0 +1,377 @@
+{% extends "base.html" %} {% load static %}
+
+<!---->
+{% block content %}
+
+<!--section   -->
+<section class="hero-section">
+  <div class="bg-wrap hero-section_bg">
+    <div
+      class="bg"
+      data-bg="{% if post.cover_image %}{{post.cover_image.url}}{% else %}{% static 'images/bg/9.jpg' %}{% endif %}"
+    ></div>
+  </div>
+  <div class="container">
+    <div class="hero-section_title">
+      <h2>Post - List View</h2>
+    </div>
+    <div class="clearfix"></div>
+    <div class="breadcrumbs-list fl-wrap">
+      <a href="{% url 'posts:posts' %}">Post</a>
+      <span>{{post.title|truncatewords:"15"}}</span>
+    </div>
+    <div class="scroll-down-wrap scw_transparent">
+      <div class="mousey">
+        <div class="scroller"></div>
+      </div>
+      <span>Scroll Down To Discover</span>
+    </div>
+  </div>
+</section>
+<!-- section end  -->
+
+<!--section   -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="main-container fl-wrap fix-container-init">
+          <!-- single-post-header  -->
+          <div class="single-post-header fl-wrap">
+            <a
+              class="post-category-marker"
+              href="{{post.category.get_absolute_url}}"
+              >{{post.category}}</a
+            >
+            <div class="clearfix"></div>
+            <h1>{{post.title}}</h1>
+            <h4>{{post.summary}}</h4>
+            <div class="clearfix"></div>
+            <div class="author-link">
+              <a href="{{post.profile.get_absolute_url}}"
+                ><img src="{% static 'images/avatar/2.jpg' %}" alt="" />
+                <span>By {{post.profile.get_full_name}}</span></a
+              >
+            </div>
+            <span class="post-date"
+              ><i class="far fa-clock"></i>
+              <!---->
+              {{post.timestamp|date:"jS F Y"}}</span
+            >
+            <ul class="post-opt">
+              <li><i class="far fa-comments-alt"></i> {{post.comments}}</li>
+              <li><i class="fal fa-eye"></i> {{post.views}}</li>
+            </ul>
+          </div>
+          <!-- single-post-header end   -->
+          <!-- single-post-media   -->
+          <div class="single-post-media fl-wrap">
+            <div class="single-slider-wrap fl-wrap">
+              <div class="single-slider fl-wrap">
+                <div class="swiper-container">
+                  <div class="swiper-wrapper lightgallery">
+                    {% if post.post_postimageslides.all %}
+                    <!-- swiper-slide   -->
+                    {% for slide in post.post_postimageslides.all %}
+                    <div class="swiper-slide hov_zoom">
+                      <img src="{{slide.image.url}}" alt="" />
+                      <a
+                        href="{{slide.image.url}}"
+                        class="box-media-zoom popup-image"
+                        ><i class="fas fa-search"></i
+                      ></a>
+                      <span class="post-media_title pmd_vis"
+                        >© Image Copyrights Title</span
+                      >
+                    </div>
+                    {% endfor %}
+                    <!-- swiper-slide end   -->
+                    {% else %}
+                    <div class="swiper-slide hov_zoom">
+                      <img src="{{post.bg_image.url}}" alt="" />
+                      <a
+                        href="{{post.bg_image.url}}"
+                        class="box-media-zoom popup-image"
+                        ><i class="fas fa-search"></i
+                      ></a>
+                      <span class="post-media_title pmd_vis"
+                        >© Image Copyrights Title</span
+                      >
+                    </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+              {% if post.post_postimageslides.all %}
+              <div class="ss-slider-cont ss-slider-cont-prev">
+                <i class="fas fa-caret-left"></i>
+              </div>
+              <div class="ss-slider-cont ss-slider-cont-next">
+                <i class="fas fa-caret-right"></i>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+          <!-- single-post-media end   -->
+          <!-- single-post-content   -->
+          <div class="single-post-content spc_column fl-wrap">
+            <div class="single-post-content_column">
+              <div class="share-holder ver-share fl-wrap">
+                <div class="share-title">
+                  Share This <br />
+                  Article:
+                </div>
+                <div class="share-container isShare"></div>
+              </div>
+            </div>
+            <div class="fs-wrap smpar fl-wrap">
+              <div class="fontSize">
+                <span class="fs_title">Font size: </span
+                ><input
+                  type="text"
+                  class="rage-slider"
+                  data-step="1"
+                  data-min="12"
+                  data-max="15"
+                  value="12"
+                />
+              </div>
+              <div class="show-more-snopt smact">
+                <i class="fal fa-ellipsis-v"></i>
+              </div>
+              <div class="show-more-snopt-tooltip">
+                <a href="#comments" class="custom-scroll-link">
+                  <i class="fas fa-comment-alt"></i> Write a Comment</a
+                >
+                <a href="#">
+                  <i class="fas fa-exclamation-triangle"></i> Report
+                </a>
+              </div>
+              <a
+                class="print-btn"
+                href="javascript:window.print()"
+                data-microtip-position="bottom"
+                ><span>Print</span><i class="fal fa-print"></i
+              ></a>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="">{{post.content|safe}}</div>
+
+            <div class="single-post-footer fl-wrap">
+              <div class="post-single-tags">
+                <span class="tags-title"
+                  ><i class="fas fa-tag"></i> Tags :
+                </span>
+                <div class="tags-widget">
+                  <a href="#">Science</a>
+                  <a href="#">Technology</a>
+                  <a href="#">Business</a>
+                  <a href="#">Lifestyle</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- single-post-nav"   -->
+            <div class="single-post-nav fl-wrap">
+              {% if prev_post %}
+              <a
+                href="{{prev_post.get_absolute_url}}"
+                class="single-post-nav_prev spn_box"
+              >
+                <div class="spn-box-content">
+                  <span class="spn-box-content_subtitle"
+                    ><i class="fas fa-caret-left"></i> Prev Post</span
+                  >
+                  <span class="spn-box-content_title"
+                    >{{prev_post.title|truncatewords:"3"}}</span
+                  >
+                </div>
+              </a>
+              {% endif %}
+              <!---->
+              {% if next_post %}
+              <a
+                href="{{next_post.get_absolute_url}}"
+                class="single-post-nav_next spn_box"
+              >
+                <div class="spn-box-content">
+                  <span class="spn-box-content_subtitle"
+                    >Next Post <i class="fas fa-caret-right"></i
+                  ></span>
+                  <span class="spn-box-content_title"
+                    >{{next_post.title|truncatewords:"3"}}</span
+                  >
+                </div>
+              </a>
+              {% endif %}
+            </div>
+            <!-- single-post-nav"  end   -->
+          </div>
+          <!-- single-post-content  end   -->
+          <div class="limit-box2 fl-wrap"></div>
+          <!-- post-author-->
+          <div class="post-author fl-wrap">
+            <div class="author-img">
+              <img src="{% static 'images/avatar/2.jpg' %}" alt="" />
+            </div>
+            <div class="author-content fl-wrap">
+              <h5>
+                Written By
+                <a href="{{post.profile.get_absolute_url}}"
+                  >{{post.profile.get_full_name}}</a
+                >
+              </h5>
+              <p>{{post.profile.bio|truncatewords:"60"}}</p>
+            </div>
+            <div class="profile-card-footer fl-wrap">
+              <a
+                href="{{post.profile.get_absolute_url}}"
+                class="post-author_link"
+                >View Profile <i class="fas fa-caret-right"></i
+              ></a>
+              {% if post.profile.get_social_links %}
+              <div class="profile-card-footer_soc">
+                <div class="profile-card-footer_title">Follow:</div>
+                <div class="profile-card-social">
+                  <ul>
+                    {% for social in post.profile.get_social_links %}
+                    <li>
+                      <a href="//{{social.link}}" target="_blank"
+                        ><i class="fab {{social.get_icon_display}}"></i
+                      ></a>
+                    </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+          <!--post-author end-->
+          {% if related %}
+          <div class="more-post-wrap fl-wrap">
+            <div class="pr-subtitle prs_big">Related Posts</div>
+            <div class="list-post-wrap list-post-wrap_column fl-wrap">
+              <div class="row">
+                {% for post in related %}
+                <div class="col-md-6">
+                  <!--list-post-->
+                  <div class="list-post fl-wrap">
+                    <a
+                      class="post-category-marker"
+                      href="{{post.category.get_absolute_url}}"
+                      >{{post.category.name}}</a
+                    >
+                    <div class="list-post-media">
+                      <a href="{{post.get_absolute_url}}">
+                        <div class="bg-wrap">
+                          <div class="bg" data-bg="{{post.bg_image.url}}"></div>
+                        </div>
+                      </a>
+                      <span class="post-media_title"
+                        >&copy; Image Copyrights Title</span
+                      >
+                    </div>
+                    <div class="list-post-content">
+                      <h3>
+                        <a href="{{post.get_absolute_url}}"
+                          >{{post.title|truncatewords:"15"}}</a
+                        >
+                      </h3>
+                      <span class="post-date"
+                        ><i class="far fa-clock"></i>
+                        <!---->
+                        {{post.timestamp|date:"jS F Y"}}</span
+                      >
+                    </div>
+                  </div>
+                  <!--list-post end-->
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          <!--comments  -->
+          <div id="comments" class="single-post-comm fl-wrap">
+            {% if post.get_post_comment %}
+            <!---->
+            {% include "posts/sections/comment/comments.html" %} {% endif %}
+            <div class="clearfix"></div>
+            {% include "posts/sections/comment/form.html" %}
+            <!--end respond-->
+          </div>
+          <!--comments end -->
+        </div>
+      </div>
+      <div class="col-md-4">
+        <!-- sidebar   -->
+        <div class="sidebar-content fl-wrap fixed-bar">
+          <!-- box-widget -->
+          {% include "(shared)/search_widget.html" %}
+          <!-- box-widget  end -->
+          <!-- box-widget -->
+          <div class="box-widget fl-wrap">{% include "shop/shop.html" %}</div>
+          <!-- box-widget  end -->
+          <!-- box-widget -->
+          <div class="box-widget fl-wrap">
+            {% include "(shared)/categories.html" %}
+          </div>
+          <!-- box-widget  end -->
+          <!-- box-widget -->
+          {% include "posts/tags.html" %}
+          <!-- box-widget  end -->
+          <!-- box-widget -->
+          {% include "(shared)/socials.html" %}
+          <!-- box-widget  end -->
+          <!-- box-widget -->
+          <div class="box-widget fl-wrap">
+            <div class="box-widget-content">
+              <!-- content-tabs-wrap -->
+              <div class="content-tabs-wrap tabs-act tabs-widget fl-wrap">
+                <div class="content-tabs fl-wrap">
+                  <ul class="tabs-menu fl-wrap no-list-style">
+                    <li class="current">
+                      <a href="#tab-popular"> Popular News </a>
+                    </li>
+                    <li><a href="#tab-resent">Resent News</a></li>
+                  </ul>
+                </div>
+                <!--tabs -->
+                <div class="tabs-container">
+                  <!--tab -->
+                  {% include "home/section/popular.html" %}
+                  <!--tab  end-->
+                  <!--tab -->
+                  {% include "home/section/recent.html" %}
+                  <!--tab end-->
+                </div>
+                <!--tabs end-->
+              </div>
+              <!-- content-tabs-wrap end -->
+            </div>
+          </div>
+          <!-- box-widget  end -->
+        </div>
+        <!-- sidebar  end -->
+      </div>
+    </div>
+    <div class="limit-box fl-wrap"></div>
+  </div>
+</section>
+<!-- section end -->
+{% endblock content %}
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->

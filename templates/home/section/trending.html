@@ -1,0 +1,43 @@
+{% load static %}
+<div class="fs-carousel fl-wrap">
+  <div class="swiper-container">
+    {% if trending %}
+    <div class="swiper-wrapper">
+      {% for post in trending %}
+      <!-- swiper-slide-->
+      <div class="swiper-slide">
+        <div class="grid-post-item bold_gpi fl-wrap">
+          <div class="grid-post-media gpm_sing">
+            <div class="bg" data-bg="{{post.bg_image.url}}"></div>
+            <div class="author-link">
+              <a href=""
+                ><img src="{% static 'images/avatar/2.jpg' %}" alt="" />
+                <span>By {{post.profile.get_full_name}}</span></a
+              >
+            </div>
+            <div class="grid-post-media_title">
+              <a class="post-category-marker" href="">{{post.category}}</a>
+              <h4>
+                <a href="{{post.get_absolute_url}}"
+                  >{{post.title|truncatewords:"15"}}</a
+                >
+              </h4>
+              <span class="video-date"
+                ><i class="far fa-clock"></i>
+                <!---->
+                {{post.timestamp|date:"jS F Y"}}</span
+              >
+              <ul class="post-opt">
+                <li><i class="far fa-comments-alt"></i> {{post.comments}}</li>
+                <li><i class="fal fa-eye"></i> {{post.views}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- swiper-slide end-->
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</div>

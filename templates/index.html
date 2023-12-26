@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+<!---->
+{% load static %}
+<!---->
+<!---->
+
+{% block content %}
+
+<!-- hero-slider-wrap     -->
+{% include "home/hero.html" %}
+<!-- hero-slider-wrap  end   -->
+<!-- section   -->
+<section>
+  <div class="container">
+    <div class="row">{% include "home/best.html" %}</div>
+  </div>
+</section>
+<!-- section end -->
+
+<!-- section   -->
+<section class="dark-bg no-bottom-padding">
+  <div class="video_carousel-wrap fl-wrap">
+    <div class="container">
+      <div class="video_carousel-container">
+        <div class="video_carousel_title">
+          <h4>Popular Videos</h4>
+          <div class="vc-pagination pag-style"></div>
+        </div>
+        <!-- fw-carousel  -->
+        {% include "home/section/videos.html" %}
+        <!-- fw-carousel end -->
+        <div class="cc-prev cc_btn"><i class="fas fa-caret-left"></i></div>
+        <div class="cc-next cc_btn"><i class="fas fa-caret-right"></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- section end -->
+<!-- section  -->
+<section>
+  <div class="container">
+    <div class="section-title sect_dec">
+      <h2>Best In Categories</h2>
+      <h4>Don't miss daily news</h4>
+    </div>
+    <div class="row">
+      <!---->
+      {% include "home/section/most/best_col5.html" %}
+      <!---->
+      {% include "home/section/most/best_col7.html" %}
+      <!---->
+    </div>
+  </div>
+</section>
+<!-- section end -->
+
+<div class="py-10 my-4" />
+<!-- section -->
+<section class="no-padding">
+  <div class="fs-carousel-wrap">
+    <div class="fs-carousel-wrap_title">
+      <div class="fs-carousel-wrap_title-wrap fl-wrap">
+        <h4>Trending News</h4>
+        <h5>Don't Miss And Stay Up-to-date. Top pic for you.</h5>
+      </div>
+      <div class="abs_bg"></div>
+      <div class="gs-controls">
+        <div class="gs_button gc-button-next">
+          <i class="fas fa-caret-right"></i>
+        </div>
+        <div class="gs_button gc-button-prev">
+          <i class="fas fa-caret-left"></i>
+        </div>
+      </div>
+    </div>
+    {% include "home/section/trending.html" %}
+  </div>
+</section>
+<!-- section end -->
+<!-- section  -->
+<div class="gray-bg ad-wrap fl-wrap">
+  <div class="content-banner-wrap">
+    <img src="{% static 'images/all/banner.jpg' %}" class="respimg" alt="" />
+  </div>
+</div>
+<!-- section end -->
+{% endblock content %}
+<!---->
+<!---->
+<!---->

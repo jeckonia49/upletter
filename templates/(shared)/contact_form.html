@@ -1,0 +1,35 @@
+{% load static %} {% load humanize %}
+
+<form class="custom-form" action="{% url 'contact-send' %}" method="post">
+  {% csrf_token %}
+  <fieldset>
+    <input
+      type="text"
+      name="name"
+      id="name"
+      placeholder="Your Name *"
+      value=""
+    />
+    <input
+      type="text"
+      name="email"
+      id="email"
+      placeholder="Email Address*"
+      value=""
+    />
+    <textarea
+      name="message"
+      id="message"
+      cols="40"
+      rows="3"
+      placeholder="Your Message:"
+    ></textarea>
+  </fieldset>
+  <button
+    style="background-color: black"
+    type="submit"
+    class="bg-black btn flex-auto"
+  >
+    Send message <i class="fas fa-caret-right"></i>
+  </button>
+</form>

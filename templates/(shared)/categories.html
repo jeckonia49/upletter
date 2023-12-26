@@ -1,0 +1,13 @@
+{% if categories %}
+<div class="widget-title">Categories</div>
+<div class="box-widget-content">
+  <ul class="cat-wid-list">
+    {% for category in categories %}
+    <li>
+      <a href="{{category.get_absolute_url}}">{{category.name|title}}</a
+      ><span>{{category.get_post_related.count}}</span>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}

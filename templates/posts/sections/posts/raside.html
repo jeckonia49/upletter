@@ -1,0 +1,47 @@
+{% load static %}
+
+<div class="sidebar-content fl-wrap fixed-bar">
+  <!-- box-widget -->
+  {% include "(shared)/search_widget.html" %}
+  <!-- box-widget  end -->
+
+  <!-- box-widget -->
+  <div class="box-widget fl-wrap">{% include "shop/shop.html" %}</div>
+  <!-- box-widget  end -->
+  <!-- box-widget -->
+  <div class="box-widget fl-wrap">{% include "(shared)/categories.html" %}</div>
+  <!-- box-widget  end -->
+  <!-- box-widget -->
+  {% include "posts/tags.html" %}
+  <!-- box-widget  end -->
+  <!-- box-widget -->
+  {% include "(shared)/socials.html" %}
+  <!-- box-widget  end -->
+
+  <!-- box-widget -->
+  <div class="box-widget fl-wrap">
+    <div class="box-widget-content">
+      <!-- content-tabs-wrap -->
+      <div class="content-tabs-wrap tabs-act tabs-widget fl-wrap">
+        <div class="content-tabs fl-wrap">
+          <ul class="tabs-menu fl-wrap no-list-style">
+            <li class="current"><a href="#tab-popular"> Popular News </a></li>
+            <li><a href="#tab-resent">Resent News</a></li>
+          </ul>
+        </div>
+        <!--tabs -->
+        <div class="tabs-container">
+          <!--tab -->
+          {% include "home/section/popular.html" %}
+          <!--tab  end-->
+          <!--tab -->
+          {% include "home/section/recent.html" %}
+          <!--tab end-->
+        </div>
+        <!--tabs end-->
+      </div>
+      <!-- content-tabs-wrap end -->
+    </div>
+  </div>
+  <!-- box-widget  end -->
+</div>

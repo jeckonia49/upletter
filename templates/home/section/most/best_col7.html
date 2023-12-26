@@ -1,0 +1,66 @@
+{% load static %}
+<div class="col-md-7">
+  <div class="picker-wrap-container fl-wrap">
+    <div class="picker-wrap-controls">
+      <ul class="fl-wrap">
+        <li>
+          <span class="pwc_up"><i class="fas fa-caret-up"></i></span>
+        </li>
+        <li>
+          <span class="pwc_pause"><i class="fas fa-pause"></i></span>
+        </li>
+        <li>
+          <span class="pwc_down"><i class="fas fa-caret-down"></i></span>
+        </li>
+      </ul>
+    </div>
+    {% if main %}
+    <div class="picker-wrap fl-wrap">
+      <div class="list-post-wrap fl-wrap">
+        {% for post in main %}
+        <!--list-post-->
+        <div class="list-post fl-wrap">
+          <div class="list-post-media">
+            <a href="post-single.html">
+              <div class="bg-wrap">
+                <div class="bg" data-bg="{{post.bg_image.url}}"></div>
+              </div>
+            </a>
+            <span class="post-media_title">&copy; Image Copyrights Title</span>
+          </div>
+          <div class="list-post-content">
+            <a class="post-category-marker" href="#">{{post.category}}</a>
+            <h3>
+              <a href="{{post.get_absolute_url}}"
+                >{{post.title|truncatewords:"15"}}</a
+              >
+            </h3>
+            <span class="post-date"
+              ><i class="far fa-clock"></i>
+              <!---->
+              {{post.timestamp|date:"jS M Y"}}</span
+            >
+            <p>{{post.summary|truncatewords:"25"}}</p>
+            <ul class="post-opt">
+              <li><i class="far fa-comments-alt"></i>{{post.comments}}</li>
+              <li><i class="fal fa-eye"></i> {{post.views}}</li>
+            </ul>
+            <div class="author-link">
+              <a href=""
+                ><img
+                  src="{% static 'images/avatar/1.jpg' %}"
+                  alt="{{post.profile.get_full_name}}"
+                />
+                <span>By {{post.profile.get_full_name}}</span></a
+              >
+            </div>
+          </div>
+        </div>
+        <!--list-post end-->
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+    <div class="controls-limit fl-wrap"></div>
+  </div>
+</div>

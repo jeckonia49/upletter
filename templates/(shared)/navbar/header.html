@@ -1,0 +1,59 @@
+{% load static %}
+
+<div class="top-bar fl-wrap">
+  <div class="container">
+    <div class="date-holder">
+      <span class="date_num"></span>
+      <span class="date_mounth"></span>
+      <span class="date_year"></span>
+    </div>
+    <div class="header_news-ticker-wrap">
+      <div class="hnt_title">Hot News :</div>
+      <div class="header_news-ticker fl-wrap">
+        <ul>
+          <li>
+            <a href="javascript:void()"
+              >They chose to leave rather than put up with a governor who
+              follows science .</a
+            >
+          </li>
+          <li>
+            <a href="javascript:void()"
+              >Hold On to Your Travel Dreams in the World.</a
+            >
+          </li>
+          <li>
+            <a href="javascript:void()"
+              >White endorses bill that would ensure abortion access.</a
+            >
+          </li>
+          <li>
+            <a href="javascript:void()"
+              >NFL Power Rankings 2021: How all 32 teams stack up after Week
+              2.</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="n_contr-wrap">
+        <div class="n_contr p_btn">
+          <i class="fas fa-caret-left"></i>
+        </div>
+        <div class="n_contr n_btn">
+          <i class="fas fa-caret-right"></i>
+        </div>
+      </div>
+    </div>
+    {% if site_social %}
+    <ul class="topbar-social">
+      {% for link in site_social %}
+      <li>
+        <a href="//{{link.link}}" target="_blank"
+          ><i class="fab {{link.get_icon_display}}"></i
+        ></a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+</div>

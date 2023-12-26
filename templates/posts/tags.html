@@ -1,0 +1,12 @@
+ {% if tags %}
+    <div class="box-widget fl-wrap">
+      <div class="widget-title">Popular Tags</div>
+      <div class="box-widget-content">
+        <div class="tags-widget">
+          {% for tag in tags %}
+          <a href="#">{{tag.name|title}}</a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endif %}

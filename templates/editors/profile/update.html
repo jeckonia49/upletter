@@ -1,0 +1,81 @@
+{% extends "base.html" %} {% load static %}
+
+<!---->
+<style>
+  @media screen and (max-width: 500px) {
+    #xs-table {
+      margin-left: 10px !important;
+      margin-right: 10px !important;
+    }
+  }
+</style>
+{% load humanize %}
+<!---->
+{% block content %}
+
+<!---->
+{% include "editors/profile/nav.html" %}
+<!---->
+
+<!--section   -->
+<section>
+  <div class="container">
+    <div class="row">
+      <!---->
+      {% include "editors/author.html" %}
+      <!---->
+      <div class="col-md-8">
+        <h4 class="cart-title">Personal Information</h4>
+        <form
+          class="custom-form"
+          action="{% url 'editors:update' %}"
+          enctype="multipart/form-data"
+          method="post"
+        >
+          {% csrf_token %}
+
+          <fieldset>
+            <div class="row">
+              <div class="col-sm-6">{{form.first_name}}</div>
+              <div class="col-sm-6">{{form.last_name}}</div>
+            </div>
+            {{form.bio}}
+            <div class="clearfix"></div>
+            <button class="btn bg-red-500 float-start">
+              Update profile <i class="fas fa-caret-right"></i>
+            </button>
+          </fieldset>
+        </form>
+        <h4 class="cart-title">Social Links</h4>
+        <form
+          class="custom-form"
+          action="{% url 'editors:update-social' %}"
+          enctype="multipart/form-data"
+          method="post"
+        >
+          {% csrf_token %}
+          <!--  -->
+          {{formset.management_form}}
+          <!--  -->
+          {% for form1 in formset %}
+          <fieldset>
+            <div class="row">
+              <div class="col-sm-6">{{form1.platform}}</div>
+              <div class="col-sm-6">{{form1.link}}</div>
+              <div class="col-sm-6">{{form1.icon}}</div>
+            </div>
+            <div class="clearfix"></div>
+            {% endfor %}
+            <button class="btn bg-red-500 float-start">
+              Social Link <i class="fas fa-caret-right"></i>
+            </button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="limit-box fl-wrap"></div>
+</section>
+<!-- section end -->
+<!---->
+{% endblock content %}

@@ -1,0 +1,38 @@
+{% load static %}
+
+<div class="left_fix-bar fl-wrap">
+  <div class="categories_nav fl-wrap">
+    <!-- nav -->
+    <nav class="categories_nav-inner" id="menu2">
+      <ul>
+        <li>
+          <a href="{% url 'posts:posts' %}" class="act-category"
+            ><i class="fal fa-rss"></i> All News</a
+          >
+        </li>
+        {% if genres %}
+        <!---->
+        {% for genra in genres %}
+        <li>
+          <a href="#"><i class="fal fa-file"></i> {{genra.name|title}}</a>
+          <!--level 2 -->
+          {% if genra.get_category_related %}
+          <ul>
+            {% for category in genra.get_category_related %}
+            <li>
+              <a href="{{category.get_absolute_url}}"
+                >{{category.name|title}}</a
+              >
+            </li>
+            {% endfor %}
+          </ul>
+          <!--level 2 end -->
+          {% endif %}
+        </li>
+        {% endfor %} {% endif %}
+      </ul>
+    </nav>
+    <!-- nav end-->
+  </div>
+  {% include "shop/shop.html" %}
+</div>

@@ -1,0 +1,217 @@
+{% load static %}
+
+<div class="hero-hrid fl-wrap gray-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="single-slider-wrap fl-wrap">
+          <div class="single-slider fl-wrap">
+            <div class="swiper-container">
+              {% if main %}
+
+              <div class="swiper-wrapper">
+                {% for post in main %}
+                <!-- swiper-slide   -->
+                <div class="swiper-slide">
+                  <div class="grid-post-item bold_gpi fl-wrap">
+                    <div class="grid-post-media gpm_sing">
+                      <div class="bg" data-bg="{{post.bg_image.url}}"></div>
+                      <div class="author-link">
+                        <a href="{{post.profile.get_absolute_url}}"
+                          ><img
+                            src="{% static 'images/avatar/4.jpg' %}"
+                            alt=""
+                          />
+                          <span
+                            >By {{post.profile.get_full_name|title}}</span
+                          ></a
+                        >
+                      </div>
+                      <div class="grid-post-media_title">
+                        <a
+                          class="post-category-marker"
+                          href="{{post.category.get_absolute_url}}"
+                          >{{post.category}}</a
+                        >
+                        <h4>
+                          <a href="{{post.get_absolute_url}}"
+                            >{{post.title|title|truncatewords:"20"}}</a
+                          >
+                        </h4>
+                        <span class="video-date"
+                          ><i class="far fa-clock"></i>
+                          {{post.timestamp|date:"jS M Y"}}</span
+                        >
+                        <ul class="post-opt">
+                          <li>
+                            <i class="far fa-comments-alt"></i>
+                            {{post.comments}}
+                          </li>
+                          <li><i class="fal fa-eye"></i> {{post.views}}</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- swiper-slide end   -->
+                {% endfor %}
+              </div>
+
+              {% endif %}
+            </div>
+          </div>
+          <div class="ss-slider-cont ss-slider-cont-prev">
+            <i class="fas fa-caret-left"></i>
+          </div>
+          <div class="ss-slider-cont ss-slider-cont-next">
+            <i class="fas fa-caret-right"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        {% if main_g1 %}
+        <div class="grid-post-item bold_gpi fl-wrap">
+          <div class="grid-post-media gpm_sing bold_gpi_half">
+            <div class="bg" data-bg="{{main_g1.bg_image.url}}"></div>
+            <div class="author-link">
+              <a href="{{main_g1.profile.get_absolute_url}}"
+                ><img src="{% static 'images/avatar/3.jpg' %}" alt="" />
+                <span>{{main_g1.profile.get_full_name}}</span></a
+              >
+            </div>
+            <div class="grid-post-media_title">
+              <a
+                class="post-category-marker"
+                href="{{main_g1.category.get_absolute_url}}"
+                >{{main_g1.category}}</a
+              >
+              <h4>
+                <a href="{{main_g1.get_absolute_url}}"
+                  >{{main_g1.title|title|truncatewords:"50"}}</a
+                >
+              </h4>
+              <span class="video-date"
+                ><i class="far fa-clock"></i>
+                {{main_g1.timestamp|date:"jS M Y"}}
+              </span>
+              <ul class="post-opt">
+                <li>
+                  <i class="far fa-comments-alt"></i> {{main_g1.comments}}
+                </li>
+                <li><i class="fal fa-eye"></i> {{main_g1.views}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        <!---->
+        <div class="grid-post-item bold_gpi fl-wrap">
+          <div class="grid-post-media gpm_sing bold_gpi_half">
+            <div class="bg" data-bg="{{main_g2.bg_image.url}}"></div>
+            <div class="author-link">
+              <a href="{{main_g2.profile.get_absolute_url}}"
+                ><img src="{% static 'images/avatar/3.jpg' %}" alt="" />
+                <span>{{main_g2.profile.get_full_name}}</span></a
+              >
+            </div>
+            <div class="grid-post-media_title">
+              <a
+                class="post-category-marker"
+                href="{{main_g2.category.get_absolute_url}}"
+                >{{main_g2.category|title}}</a
+              >
+              <h4>
+                <a href="{{main_g2.get_absolute_url}}"
+                  >{{main_g1.title|title|truncatewords:"50"}}</a
+                >
+              </h4>
+              <span class="video-date"
+                ><i class="far fa-clock"></i>
+                {{main_g2.timestamp|date:"jS M Y"}}
+              </span>
+              <ul class="post-opt">
+                <li>
+                  <i class="far fa-comments-alt"></i> {{main_g2.comments}}
+                </li>
+                <li><i class="fal fa-eye"></i> {{main_g2.views}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        {% if main_g3 %}
+        <div class="grid-post-item bold_gpi fl-wrap">
+          <div class="grid-post-media gpm_sing bold_gpi_half">
+            <div class="bg" data-bg="{{main_g3.bg_image.url}}"></div>
+            <div class="author-link">
+              <a href="{{main_g3.profile.get_absolute_url}}"
+                ><img src="{% static 'images/avatar/3.jpg' %}" alt="" />
+                <span>{{main_g3.profile.get_full_name}}</span></a
+              >
+            </div>
+            <div class="grid-post-media_title">
+              <a
+                class="post-category-marker"
+                href="{{main_g3.category.get_absolute_url}}"
+                >{{main_g3.category|title}}</a
+              >
+              <h4>
+                <a href="{{main_g3.get_absolute_url}}"
+                  >{{main_g3.title|title|truncatewords:"50"}}</a
+                >
+              </h4>
+              <span class="video-date"
+                ><i class="far fa-clock"></i>
+                {{main_g3.timestamp|date:"jS M Y"}}
+              </span>
+              <ul class="post-opt">
+                <li>
+                  <i class="far fa-comments-alt"></i> {{main_g3.comments}}
+                </li>
+                <li><i class="fal fa-eye"></i> {{main_g3.views}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        <!---->
+        {% if main_g4 %}
+        <div class="grid-post-item bold_gpi fl-wrap">
+          <div class="grid-post-media gpm_sing bold_gpi_half">
+            <div class="bg" data-bg="{{main_g4.bg_image.url}}"></div>
+            <div class="author-link">
+              <a href="{{main_g4.profile.get_absolute_url}}"
+                ><img src="{% static 'images/avatar/3.jpg' %}" alt="" />
+                <span>{{main_g4.profile.get_full_name}}</span></a
+              >
+            </div>
+            <div class="grid-post-media_title">
+              <a
+                class="post-category-marker"
+                href="{{main_g4.category.get_absolute_url}}"
+                >{{main_g4.category|title}}</a
+              >
+              <h4>
+                <a href="{{main_g4.get_absolute_url}}"
+                  >{{main_g4.title|title|truncatewords:"50"}}</a
+                >
+              </h4>
+              <span class="video-date"
+                ><i class="far fa-clock"></i>
+                {{main_g4.timestamp|date:"jS M Y"}}
+              </span>
+              <ul class="post-opt">
+                <li>
+                  <i class="far fa-comments-alt"></i> {{main_g4.comments}}
+                </li>
+                <li><i class="fal fa-eye"></i> {{main_g4.views}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

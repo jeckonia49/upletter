@@ -1,0 +1,56 @@
+{% load static %}
+
+<div class="header-cart_wrap novis_cart">
+  <div class="header-cart_title">
+    Your Cart <span><strong>2</strong> items</span>
+  </div>
+  <div class="header-cart_wrap_container fl-wrap">
+    <div class="box-widget-content">
+      <div class="widget-posts fl-wrap">
+        <ol>
+          <li class="clearfix">
+            <a href="#" class="widget-posts-img"
+              ><img
+                src="{% static 'images/shop/1.jpg' %}"
+                class="respimg"
+                alt=""
+            /></a>
+            <div class="widget-posts-descr">
+              <a href="#" title="">Awesome Merch Wallet</a>
+              <div class="widget-posts-descr_calc clearfix">
+                1 <span>x</span> $845
+              </div>
+            </div>
+            <div class="clear-cart_button">
+              <i class="far fa-times"></i>
+            </div>
+          </li>
+          <li class="clearfix">
+            <a href="#" class="widget-posts-img"
+              ><img
+                src="{% static 'images/shop/2.jpg' %}"
+                class="respimg"
+                alt=""
+            /></a>
+            <div class="widget-posts-descr">
+              <a href="#" title="">Gmag Merch Wallet</a>
+              <div class="widget-posts-descr_calc clearfix">
+                2 <span>x</span> $222
+              </div>
+            </div>
+            <div class="clear-cart_button">
+              <i class="fal fa-times"></i>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <div class="header-cart_wrap_total fl-wrap">
+    <div class="header-cart_wrap_total_item">Subtotal : <span>$1559</span></div>
+  </div>
+  <div class="header-cart_wrap_footer fl-wrap">
+    <a href="cart.html"> View Cart</a>
+    <a href="checkout.html"> Checkout</a>
+  </div>
+</div>

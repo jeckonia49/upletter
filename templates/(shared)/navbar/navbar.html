@@ -1,0 +1,111 @@
+{% load static %}
+<!---->
+{% load flatpages %}
+
+<header class="main-header">
+  <!-- top bar -->
+  {% include "(shared)/navbar/header.html" %}
+  <!-- top bar end -->
+  <div class="header-inner fl-wrap">
+    <div class="container">
+      <!-- logo holder  -->
+      <a href="{% url 'home' %}" class="logo-holder"
+        ><img src="{% static 'images/logo.png' %}" alt=""
+      /></a>
+      <!-- logo holder end -->
+      <div class="search_btn htact show_search-btn">
+        <i class="far fa-search"></i>
+        <span class="header-tooltip">Search</span>
+      </div>
+      <!-- logo holder end -->
+      {% if request.user.is_authenticated and request.user.is_editor %}
+      <div class="search_btn htact">
+        <i class="fa fa-cog"></i>
+        <a href="{% url 'editors:profile' %}" class="header-tooltip">Profile</a>
+      </div>
+      {% endif %}
+      <div
+        class="srf_btn htact {% if not request.user.is_authenticated %} show-reg-form {% endif %}"
+      >
+        <i class="fal fa-user"></i>
+        {% if request.user.is_authenticated %}
+        <form action="{% url 'accounts:logout' %}" method="post">
+          {% csrf_token %}
+          <button class="header-tooltip">Sign Out</button>
+          <button class="header-tooltip">Sign Out</button>
+          <hr />
+        </form>
+        {% else %}
+        <!---->
+        <span class="header-tooltip">Sign In</span>
+        {% endif %}
+        <!---->
+      </div>
+
+      <!-- header-search-wrap -->
+      <div class="header-search-wrap novis_sarch">
+        <div class="widget-inner">
+          <form action="{% url 'posts:post_search' %}" method="get">
+            <input
+              name="post_qs"
+              id="se"
+              type="text"
+              class="search"
+              placeholder="Search..."
+              value=""
+            />
+            <button class="search-submit" type="submit" id="submit_btn">
+              <i class="fa fa-search transition"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+      <!-- header-search-wrap end -->
+
+      <!-- nav-button-wrap-->
+      <div class="nav-button-wrap">
+        <div class="nav-button"><span></span><span></span><span></span></div>
+      </div>
+      <!-- nav-button-wrap end-->
+      <!--  navigation -->
+      <div class="nav-holder main-menu">
+        <nav>
+          <ul>
+            <li>
+              <a href="{% url 'home' %}" class="act-link">Home</a>
+            </li>
+            <li>
+              <a href="{% url 'posts:posts' %}">News</a>
+            </li>
+            <li><a href="">Business</a></li>
+            <li><a href="">Technology</a></li>
+            <li>
+              <a href="#">Shop <i class="fas fa-caret-down"></i></a>
+              <!--second level -->
+              <ul>
+                <li><a href="">Products</a></li>
+                <li><a href="">Product Single</a></li>
+                <li><a href="">Cart</a></li>
+                <li><a href="">Checkout</a></li>
+              </ul>
+              <!--second level end-->
+            </li>
+            {% get_flatpages as flatpages %}
+            <li>
+              <a href="#">More<i class="fas fa-caret-down"></i></a>
+              <!--second level -->
+              <ul>
+                {% for page in flatpages %}
+                <li><a href="{{ page.url }}">{{page.title}}</a></li>
+                {% endfor %}
+              </ul>
+              <!--second level end-->
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <!-- navigation  end -->
+    </div>
+  </div>
+</header>
+<!-- header end  -->

@@ -1,0 +1,28 @@
+{% load static %}
+
+<!--section   -->
+<section class="hero-section">
+  <div class="bg-wrap hero-section_bg">
+    <div
+      class="bg"
+      data-bg="{% if editor.cover_image %}{{editor.cover_image.url}}{% else %}{% static 'images/bg/11.jpg' %}{% endif %}"
+    ></div>
+  </div>
+  <div class="container">
+    <div class="hero-section_title">
+      <h2>{{editor.get_full_name|title}} Page</h2>
+    </div>
+    <div class="clearfix"></div>
+    <div class="breadcrumbs-list fl-wrap">
+      <a href="">Home</a> <a href="">Author</a>
+      <span>{{editor.get_full_name}} </span>
+    </div>
+    <div class="scroll-down-wrap scw_transparent">
+      <div class="mousey">
+        <div class="scroller"></div>
+      </div>
+      <span>Scroll Down To Discover</span>
+    </div>
+  </div>
+</section>
+<!-- section end  -->

@@ -1,0 +1,41 @@
+{% load static %}
+
+<div class="pr-subtitle prs_big">
+  Comment{{post.get_post_comment.count|pluralize}}
+  <span>{{post.get_post_comment.count}}</span>
+</div>
+<ul class="commentlist clearafix">
+  {% for comment in post.get_post_comment %}
+  <li class="comment">
+    <div class="comment-author">
+      <svg
+        width="80"
+        height="80"
+        data-jdenticon-value="comment{{comment.pk}}"
+      ></svg>
+    </div>
+    <div class="comment-body smpar">
+      <h4><a href="javascript:void(0)">{{comment.name}}</a></h4>
+      <div class="box-widget-menu-btn smact">
+        <i class="far fa-ellipsis-h"></i>
+      </div>
+      <div class="show-more-snopt-tooltip bxwt">
+        <a href="javascript:void(0)"> <i class="fas fa-reply"></i> Reply</a>
+        <a href="javascript:void(0)">
+          <i class="fas fa-exclamation-triangle"></i>
+          Report
+        </a>
+      </div>
+      <div class="clearfix"></div>
+      <p>{{comment.message|safe|linebreaks}}</p>
+      <a class="comment-reply-link" href="javascript:void(0)"
+        ><i class="fas fa-reply"></i> Reply</a
+      >
+      <div class="comment-meta">
+        <i class="far fa-clock"></i> {{comment.timestamp|date:"jS F Y"}}
+      </div>
+      <div class="comment-body_dec"></div>
+    </div>
+  </li>
+  {% endfor %}
+</ul>

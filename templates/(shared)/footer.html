@@ -1,0 +1,126 @@
+{% load static %}
+<!---->
+{% load flatpages %}
+<footer class="fl-wrap main-footer">
+  <div class="container">
+    <!-- footer-widget-wrap -->
+    <div class="footer-widget-wrap fl-wrap">
+      <div class="row">
+        <!-- footer-widget -->
+        <div class="col-md-4">
+          <div class="footer-widget">
+            <div class="footer-widget-content">
+              <a href="{% url 'home' %}" class="footer-logo"
+                ><img src="{% static 'images/logo2.png' %}" alt=""
+              /></a>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Eaque ipsa quae ab illo inventore veritatis et quasi architecto.
+              </p>
+              {% if site_social %}
+              <div class="footer-social fl-wrap">
+                <ul>
+                  {% for link in site_social %}
+                  <li>
+                    <a href="//{{link.link}}" target="_blank"
+                      ><i class="fab {{link.get_icon_display}}"></i
+                    ></a>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <!-- footer-widget  end-->
+        <!-- footer-widget -->
+        <div class="col-md-2">
+          <div class="footer-widget">
+            <div class="footer-widget-title">Categories</div>
+            <div class="footer-widget-content">
+              <div class="footer-list footer-box fl-wrap">
+                {% if footer_categories %}
+                <ul>
+                  {% for category in footer_categories %}
+                  <li>
+                    <a href="{{category.get_absolute_url}}"
+                      >{{category.name|title}}</a
+                    >
+                  </li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- footer-widget  end-->
+        <!-- footer-widget -->
+        <div class="col-md-2">
+          <div class="footer-widget">
+            <div class="footer-widget-title">Links</div>
+            <div class="footer-widget-content">
+              {% get_flatpages as flatpages %}
+              <div class="footer-list footer-box fl-wrap">
+                <ul>
+                  {% for page in flatpages %}
+                  <li><a href="{{ page.url }}">{{page.title}}</a></li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- footer-widget  end-->
+        <!-- footer-widget -->
+        <div class="col-md-4">
+          <div class="footer-widget">
+            <div class="footer-widget-title">Subscribe</div>
+            <div class="footer-widget-content">
+              <div class="subcribe-form fl-wrap">
+                <p>
+                  Want to be notified when we launch a new template or an
+                  udpate. Just sign up and we'll send you a notification by
+                  email.
+                </p>
+                <form
+                  action="{% url 'subscription' %}"
+                  class="fl-wrap"
+                  method="post"
+                >
+                  {% csrf_token %} {{subscription_form.email}}
+                  <button type="submit" class="subscribe-button color-bg">
+                    subscribe
+                  </button>
+                  <label
+                    for="subscribe-email"
+                    class="subscribe-message"
+                  ></label>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- footer-widget  end-->
+      </div>
+    </div>
+    <!-- footer-widget-wrap end-->
+  </div>
+  <div class="footer-bottom fl-wrap">
+    <div class="container">
+      <div class="copyright">
+        <span>&#169; Gmag <span id="current-year"></span> </span>
+        . All rights reserved.
+      </div>
+      <div class="to-top"><i class="fas fa-caret-up"></i></div>
+      <div class="subfooter-nav">
+        <ul>
+          <li><a href="#">Terms & Conditions</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,141 @@
+{% extends "base.html" %} {% load static %}
+
+<!---->
+{% block content %}
+<!---->
+<!--section   -->
+<section class="hero-section">
+  <div class="bg-wrap hero-section_bg">
+    <div class="bg" data-bg="{% static 'images/bg/6.jpg' %}"></div>
+  </div>
+  <div class="container">
+    <div class="hero-section_title">
+      <h2>Category - List Column Style</h2>
+    </div>
+    <div class="clearfix"></div>
+    <div class="breadcrumbs-list fl-wrap">
+      <a href="{% url 'posts:posts' %}">Posts</a> <span>{{category.name}}</span>
+    </div>
+    <div class="scroll-down-wrap scw_transparent">
+      <div class="mousey">
+        <div class="scroller"></div>
+      </div>
+      <span>Scroll Down To Discover</span>
+    </div>
+  </div>
+</section>
+<!-- section end  -->
+
+<!--section   -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="main-container fl-wrap fix-container-init">
+          <div class="section-title">
+            <h3>Sorty by:</h3>
+            <div class="steader_opt steader_opt_abs">
+              <select
+                name="filter"
+                id="list"
+                data-placeholder="Persons"
+                class="style-select no-search-select"
+              >
+                <option>Latest</option>
+                <option>Most Read</option>
+                <option>Most Viewed</option>
+                <option>Most Commented</option>
+              </select>
+            </div>
+          </div>
+          <!--grid-post-wrap-->
+          <div class="grid-post-wrap">
+            {% if posts %}
+            <div class="row" id="category_id_posts">
+              <!--grid-post-item-->
+              {% include "posts/category/posts.html" %}
+              <!--grid-post-item end-->
+            </div>
+            {% endif %}
+          </div>
+          <!--grid-post-wrap end-->
+          <div class="clearfix"></div>
+          {% if is_paginated %}
+
+          <button class="load-more_btn" id="load_more_posts">
+            <i class="fal fa-undo"></i>Load More
+          </button>
+          <!--pagination-->
+          {% include "(shared)/pagination.html" %}
+          <!--pagination end-->
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-md-4">
+        <!-- sidebar   -->
+        <div class="sidebar-content fl-wrap fixed-bar">
+          <!-- box-widget -->
+          {% include "(shared)/search_widget.html" %}
+          <!-- box-widget  end -->
+          <!-- box-widget -->
+          <div class="box-widget fl-wrap">{% include "shop/shop.html" %}</div>
+          <!-- box-widget  end -->
+          <!-- box-widget -->
+          <div class="box-widget fl-wrap">
+            {% include "(shared)/categories.html" %}
+          </div>
+          <!-- box-widget  end -->
+          <!-- box-widget -->
+          {% include "posts/tags.html" %}
+          <!-- box-widget  end -->
+          <!-- box-widget -->
+          {% include "(shared)/socials.html" %}
+          <!-- box-widget  end -->
+
+          <!-- box-widget -->
+          <div class="box-widget fl-wrap">
+            <div class="box-widget-content">
+              <!-- content-tabs-wrap -->
+              <div class="content-tabs-wrap tabs-act tabs-widget fl-wrap">
+                <div class="content-tabs fl-wrap">
+                  <ul class="tabs-menu fl-wrap no-list-style">
+                    <li class="current">
+                      <a href="#tab-popular"> Popular News </a>
+                    </li>
+                    <li><a href="#tab-resent">Resent News</a></li>
+                  </ul>
+                </div>
+                <!--tabs -->
+                <div class="tabs-container">
+                  <!--tab -->
+                  {% include "home/section/popular.html" %}
+                  <!--tab  end-->
+                  <!--tab -->
+                  {% include "home/section/recent.html" %}
+                  <!--tab end-->
+                </div>
+                <!--tabs end-->
+              </div>
+              <!-- content-tabs-wrap end -->
+            </div>
+          </div>
+          <!-- box-widget  end -->
+        </div>
+        <!-- sidebar  end -->
+      </div>
+    </div>
+    <div class="limit-box fl-wrap"></div>
+  </div>
+</section>
+<!-- section  -->
+{% include "(shared)/banner.html" %}
+<!---->
+
+<style>
+  button {
+    border: none;
+    outline: none;
+  }
+</style>
+
+{% endblock content %}

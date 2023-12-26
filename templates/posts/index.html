@@ -1,0 +1,97 @@
+{% extends "base.html" %} {% load static %}
+
+<!---->
+{% block content %}
+
+<!--section   -->
+<section class="hero-section">
+  <div class="bg-wrap hero-section_bg">
+    <div class="bg" data-bg="{% static 'images/bg/9.jpg' %}"></div>
+  </div>
+  <div class="container">
+    <div class="hero-section_title">
+      <h2>News - List View</h2>
+    </div>
+    <div class="clearfix"></div>
+    <div class="breadcrumbs-list fl-wrap">
+      <a href="#">Home</a> <span>Blog List style</span>
+    </div>
+    <div class="scroll-down-wrap scw_transparent">
+      <div class="mousey">
+        <div class="scroller"></div>
+      </div>
+      <span>Scroll Down To Discover</span>
+    </div>
+  </div>
+</section>
+<!-- section end  -->
+
+<!--section   -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        {% include "posts/sections/posts/laside.html" %}
+      </div>
+      <!---->
+      <div class="col-md-5">
+        <div
+          class="main-container fl-wrap fix-container-init cen-align-container"
+        >
+          <div class="section-title">
+            <h3>Sorty by:</h3>
+            <div class="steader_opt steader_opt_abs">
+              <select
+                name="filter"
+                id="list"
+                data-placeholder="Persons"
+                class="style-select no-search-select"
+              >
+                <option>Latest</option>
+                <option>Most Read</option>
+                <option>Most Viewed</option>
+                <option>Most Commented</option>
+              </select>
+            </div>
+          </div>
+
+          {% include "posts/sections/posts/middle.html" %}
+          <div class="clearfix"></div>
+          {% if is_paginated %}
+          <!--pagination-->
+          {% include "(shared)/pagination.html" %}
+          <!--pagination end-->
+          {% endif %}
+        </div>
+      </div>
+
+      <!---->
+      <div class="col-md-4">
+        <!-- sidebar   -->
+        {% include "posts/sections/posts/raside.html" %}
+        <!-- sidebar  end -->
+      </div>
+      <!---->
+    </div>
+    <div class="limit-box fl-wrap"></div>
+  </div>
+</section>
+<!-- section end -->
+<!-- section  -->
+{% include "(shared)/banner.html" %}
+<!-- section end -->
+
+{% endblock content %}
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->

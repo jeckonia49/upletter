@@ -1,0 +1,43 @@
+{% load static %} {% if main_g2 %}
+<div class="col-md-5">
+  <div class="list-post-wrap list-post-wrap_column list-post-wrap_column_fw">
+    <!--list-post-->
+    <div class="list-post fl-wrap">
+      <a class="post-category-marker" href="#">Sports</a>
+      <div class="list-post-media">
+        <a href="{{main_g2.get_absolute_url}}">
+          <div class="bg-wrap">
+            <div class="bg" data-bg="{{main_g2.bg_image.url}}"></div>
+          </div>
+        </a>
+        <span class="post-media_title">&copy; Image Copyrights Title</span>
+      </div>
+      <div class="list-post-content">
+        <h3>
+          <a href="{{main_g2.get_absolute_url}}"
+            >{{main_g2.title|truncatewords:"10"}}
+          </a>
+        </h3>
+        <span class="post-date"
+          ><i class="far fa-clock"></i>
+          <!---->
+          {{main_g2.timestamp|date:"jS M Y"}}</span
+        >
+        <p>{{main_g2.summary|truncatewords:"25"}}</p>
+        <ul class="post-opt">
+          <li><i class="far fa-comments-alt"></i> {{main_g2.comments}}</li>
+          <li><i class="fal fa-eye"></i> {{main_g2.views}}</li>
+        </ul>
+        <div class="author-link">
+          <a href=""
+            ><img src="{% static 'images/avatar/1.jpg' %}" alt="" />
+            <span>By {{main_g2.profile.get_full_name}}</span></a
+          >
+        </div>
+      </div>
+    </div>
+    <!--list-post end-->
+  </div>
+  <a href="" class="dark-btn fl-wrap"> Read all News </a>
+</div>
+{% endif %}

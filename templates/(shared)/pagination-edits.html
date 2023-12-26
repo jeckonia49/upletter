@@ -1,0 +1,31 @@
+<div class="pagination">
+  {% if prev_url %}
+  <a href="{{prev_url}}" class="prevposts-link"
+    ><i class="fas fa-caret-left"></i
+  ></a>
+  {% endif %}
+  <!---->
+  {% if page_range %}
+  <!---->
+  {% for i in page_range|default:posts.paginator.get_elided_page_range %}
+  <!---->
+  {% if posts.number == i %}
+  <a href="?page={{i}}" class="current-page">{{i}}</a>
+  {% else %}
+  <!---->
+  {% if i == posts.paginator.ELLIPSIS %}
+  <a href="?page={{i}}">{{i}}</a>
+  {% else %}
+  <a href="?page={{i}}">{{i}}</a>
+  {% endif %}<!---->{% endif %}
+  <!---->
+  {% endfor %}
+  <!---->
+  {% endif %}
+  <!---->
+  {% if next_url %}
+  <a href="{{next_url}}" class="nextposts-link"
+    ><i class="fas fa-caret-right"></i
+  ></a>
+  {% endif %}
+</div>

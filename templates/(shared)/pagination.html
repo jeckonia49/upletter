@@ -1,0 +1,17 @@
+<div class="pagination">
+  {% if prev_url %}
+  <a href="{{prev_url}}" class="prevposts-link"
+    ><i class="fas fa-caret-left"></i
+  ></a>
+  {% endif %}
+  <!---->
+  <a href="?page={{posts.number}}" class="current-page">{{ posts.number}}</a>
+  <!---->
+
+  <!---->
+  {% if next_url %}
+  <a href="{{next_url}}" class="nextposts-link"
+    ><i class="fas fa-caret-right"></i
+  ></a>
+  {% endif %}
+</div>

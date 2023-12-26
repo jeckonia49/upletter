@@ -1,0 +1,109 @@
+{% load static %}
+
+<style>
+  .mr-10 {
+    margin-right: 10px;
+  }
+</style>
+
+<div class="main-register-wrap fl-wrap">
+  <div class="main-register_bg">
+    <div class="bg-wrap">
+      <div class="bg par-elem" data-bg="{% static 'images/bg/1.jpg' %}"></div>
+      <div class="overlay"></div>
+    </div>
+    <div class="mg_logo">
+      <img src="{% static 'images/logo2.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="main-register tabs-act fl-wrap">
+    <ul class="tabs-menu">
+      <li class="current">
+        <a href="#tab-1"><i class="fal fa-sign-in-alt"></i> Login</a>
+      </li>
+      <li>
+        <a href="#tab-2"><i class="fal fa-user-plus"></i> Register</a>
+      </li>
+    </ul>
+    <div class="close-modal close-reg-form">
+      <i class="fal fa-times"></i>
+    </div>
+    <!--tabs -->
+    <div id="tabs-container">
+      <div class="tab">
+        <!--tab -->
+        <div id="tab-1" class="tab-content first-tab">
+          <div class="custom-form">
+            <form
+              method="post"
+              name="registerform"
+              action="{% url 'accounts:login' %}"
+            >
+              {% csrf_token %}
+
+              <label>{{lform.email.label}} <span>*</span> </label>
+              {{lform.email}}
+              <label>{{lform.password.label}} <span>*</span> </label>
+              {{lform.password}}
+              <div class="filter-tags">
+                <input id="check-a" type="checkbox" name="check" checked />
+                <label for="check-a">Remember me</label>
+              </div>
+              <div class="lost_password">
+                <a href="#">Lost Your Password?</a>
+              </div>
+              <div class="clearfix"></div>
+              <button type="submit" class="log-submit-btn color-bg">
+                <span>Log In</span>
+              </button>
+            </form>
+          </div>
+        </div>
+        <!--tab end -->
+        <!--tab -->
+        <div class="tab">
+          <div id="tab-2" class="tab-content">
+            <div class="custom-form">
+              <form
+                method="post"
+                name="registerform"
+                class="main-register-form"
+                action="{% url 'accounts:register' %}"
+                id="main-register-form2"
+              >
+                {% csrf_token %}
+
+                <label>{{rform.email.label}} <span>*</span> </label>
+
+                {{rform.email}}
+                <label>{{rform.password1.label}}<span>*</span></label>
+                {{rform.password1}}
+                <label>{{rform.password2.label}}<span>*</span></label>
+                {{rform.password2}}
+                <div class="filter-tags">
+                  {{rform.agree_to_terms}}
+                  <label for="{{ rform.agree_to_terms.id_for_label }}">
+                    Agree to
+                    <a href="javascript:void(0)"
+                      >{{rform.agree_to_terms.label}}</a
+                    >
+                  </label>
+                </div>
+                <button type="submit" class="log-submit-btn color-bg">
+                  <span>Register</span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!--tab end -->
+      </div>
+      <!--tabs end -->
+      <div class="log-separator fl-wrap"><span>or</span></div>
+      <div class="soc-log fl-wrap">
+        <p>For faster login or register use your social account.</p>
+        <a href="#"><i class="fab fa-facebook-f"></i>Connect with Facebook</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="clearafix">
+  <div class="pr-subtitle">
+    Leave A Comment <i class="fas fa-caret-down"></i>
+  </div>
+  <div class="comment-reply-form fl-wrap">
+    <form
+      action="{% url 'posts:post_comment' post.slug %}"
+      method="post"
+      class="add-comment custom-form"
+    >
+      {% csrf_token %}
+      <fieldset>
+        <div class="row">
+          <div class="col-md-6">
+            <input type="text" name="name" placeholder="Your Name *" value="" />
+          </div>
+          <div class="col-md-6">
+            <input
+              type="email"
+              name="email"
+              placeholder="Email Address*"
+              value=""
+            />
+          </div>
+        </div>
+        <textarea name="message" placeholder="Your Comment:"></textarea>
+      </fieldset>
+      <button class="btn float-btn color-btn">
+        Submit Comment <i class="fas fa-caret-right"></i>
+      </button>
+    </form>
+  </div>
+</div>

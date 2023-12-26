@@ -1,0 +1,77 @@
+{% extends "base.html" %} {% load static %}
+
+<!---->
+<style>
+  @media screen and (max-width: 500px) {
+    #xs-table {
+      margin-left: 10px !important;
+      margin-right: 10px !important;
+    }
+  }
+</style>
+{% load humanize %}
+<!---->
+{% block content %}
+
+<!---->
+{% include "editors/profile/nav.html" %}
+
+<!--section   -->
+<section>
+  <div class="container">
+    <div class="row">
+      <!---->
+      {% include "editors/author.html" %}
+      <!---->
+      <div class="col-md-8" id="xs-table">
+        {% if editor.get_profile_posts %}
+        <h4 class="cart-title">
+          My Post{{editor.get_profile_posts.count|pluralize}}:
+          {{editor.get_profile_posts.count}}
+        </h4>
+        <table class="table table-border checkout-table">
+          <tbody>
+            <tr>
+              <th class="hidden-xs"># SN</th>
+              <th>title</th>
+              <th class="hidden-xs">Views</th>
+              <th class="hidden-xs">Comments</th>
+              <th class="hidden-xs">Action</th>
+            </tr>
+            {% for post in editor.get_profile_posts %}
+            <tr>
+              <td class="hidden-xs">
+                <h5 class="product-name">{{forloop.counter}}</h5>
+              </td>
+              <td>
+                <h5 class="product-name">{{post.title|truncatewords:"4"}}</h5>
+              </td>
+              <td class="hidden-xs">
+                <h5 class="order-money">{{post.views|intword}}</h5>
+              </td>
+              <td class="hidden-xs">
+                <h5 class="order-money">{{post.comments|intword}}</h5>
+              </td>
+              <td class="pr-remove hidden-xs">
+                <button><i class="fas fa-times"></i></button>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <!-- COUPON -->
+        <div class="coupon-holder fl-wrap hidden-xs">
+          <input type="text" name="cartcoupon" placeholder="Coupon code" />
+          <button type="submit" class="btn-a">Apply</button>
+          <button type="submit" class="pull-right btn-uc">Update Cart</button>
+        </div>
+        <!-- /COUPON -->
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="limit-box fl-wrap"></div>
+</section>
+<!-- section end -->
+
+{% endblock content %}

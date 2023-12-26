@@ -1,0 +1,136 @@
+{% extends "base.html" %} {% load static %}
+
+<!---->
+{% block content %}
+
+<!--section   -->
+<section class="hero-section">
+  <div class="bg-wrap hero-section_bg">
+    <div
+      class="bg"
+      data-bg="{% if editor.cover_image %}{{editor.cover_image.url}}{% else %}{% static 'images/bg/11.jpg' %}{% endif %}"
+    ></div>
+  </div>
+  <div class="container">
+    <div class="hero-section_title">
+      <h2>{{editor.get_full_name|title}} Page</h2>
+    </div>
+    <div class="clearfix"></div>
+    <div class="breadcrumbs-list fl-wrap">
+      <a href="">Home</a> <a href="">Author</a>
+      <span>{{editor.get_full_name}} </span>
+    </div>
+    <div class="scroll-down-wrap scw_transparent">
+      <div class="mousey">
+        <div class="scroller"></div>
+      </div>
+      <span>Scroll Down To Discover</span>
+    </div>
+  </div>
+</section>
+<!-- section end  -->
+
+<!--section   -->
+<section>
+  <div class="container">
+    <div class="row">
+      <!---->
+      {% include "editors/author.html" %}
+      <!---->
+      <div class="col-md-8">
+        <div class="main-container fl-wrap fix-container-init">
+          <div class="section-title">
+            <h3>{{editor.get_full_name|title}} Articles:</h3>
+            <div class="steader_opt steader_opt_abs">
+              <select
+                name="filter"
+                id="list"
+                data-placeholder="Persons"
+                class="style-select no-search-select"
+              >
+                <option>Latest</option>
+                <option>Most Read</option>
+                <option>Most Viewed</option>
+                <option>Most Commented</option>
+              </select>
+            </div>
+          </div>
+
+          <!--grid-post-wrap-->
+          {% if posts %}
+          <div class="grid-post-wrap">
+            <div class="row">
+              {% for post in posts %}
+              <!--grid-post-item-->
+              <div class="col-md-6">
+                <div class="grid-post-item bold_gpi fl-wrap">
+                  <div class="grid-post-media">
+                    <a href="{{post.get_absolute_url}}" class="gpm_link">
+                      <div class="bg-wrap">
+                        <div class="bg" data-bg="{{post.bg_image.url}}"></div>
+                      </div>
+                    </a>
+                    <span class="post-media_title"
+                      >&copy; Image Copyrights Title</span
+                    >
+                  </div>
+                  <a
+                    class="post-category-marker purp-bg"
+                    href="{{post.category.get_absolute_url}}"
+                    >{{post.category.name}}</a
+                  >
+                  <div class="grid-post-content">
+                    <h3>
+                      <a href="{{post.get_absolute_url}}"
+                        >{{post.title|truncatewords:"15"}}</a
+                      >
+                    </h3>
+                    <span class="post-date"
+                      ><i class="far fa-clock"></i>
+                      <!---->
+                      {{post.timestamp|date:"jS F Y"}}</span
+                    >
+                    <p>{{post.summary|truncatewords:"25"}}</p>
+                  </div>
+                  <div class="grid-post-footer">
+                    <div class="author-link">
+                      <a href="{{editor.get_absolute_url}}"
+                        ><img
+                          src="{% if editor.profile_image %}{{editor.profile_image.url}}{% else %}{% static 'images/avatar/1.jpg' %}{% endif %}"
+                          alt=""
+                        />
+                        <span>By {{editor.get_full_name}}</span></a
+                      >
+                    </div>
+                    <ul class="post-opt">
+                      <li>
+                        <i class="far fa-comments-alt"></i> {{post.comments}}
+                      </li>
+                      <li><i class="fal fa-eye"></i> {{post.views}}</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+              <!--grid-post-wrap end-->
+              <div class="clearfix"></div>
+              {% if is_paginated %}
+              <div class="load-more_btn">
+                <i class="fal fa-undo"></i>Load More
+              </div>
+              <!--pagination-->
+              {% include "(shared)/pagination.html" %}
+              <!--pagination end-->
+              {% endif %}
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="limit-box fl-wrap"></div>
+</section>
+<!-- section end -->
+
+{% endblock content %}

@@ -1,0 +1,91 @@
+{% load static %}
+<div class="col-md-4">
+  <!-- sidebar   -->
+  <div class="sidebar-content fl-wrap fix-bar">
+    <!-- box-widget -->
+    <div class="box-widget fl-wrap">
+      <div class="box-widget-content">
+        <!-- content-tabs-wrap -->
+        <div class="content-tabs-wrap tabs-act tabs-widget fl-wrap">
+          <div class="content-tabs fl-wrap">
+            <ul class="tabs-menu fl-wrap no-list-style">
+              <li class="current"><a href="#tab-popular"> Popular News </a></li>
+              <li><a href="#tab-resent">Resent News</a></li>
+            </ul>
+          </div>
+          <!--tabs -->
+          <div class="tabs-container">
+            <!--tab -->
+            {% include "home/section/popular.html" %}
+            <!--tab  end-->
+            <!--tab -->
+            {% include "home/section/recent.html" %}
+            <!--tab end-->
+          </div>
+          <!--tabs end-->
+        </div>
+        <!-- content-tabs-wrap end -->
+      </div>
+    </div>
+    <!-- box-widget  end -->
+
+    <!-- box-widget -->
+    {% include "(shared)/socials.html" %}
+    <!-- box-widget  end -->
+    <!-- box-widget -->
+    {% include "posts/tags.html" %}
+    <!-- box-widget  end -->
+    <!-- box-widget -->
+    <div class="box-widget fl-wrap">
+      <div class="box-widget-content">
+        <div class="single-grid-slider slider_widget">
+          <div class="slider_widget_title">Editor's Choice</div>
+          <div class="swiper-container">
+            {% if editor %}
+            <div class="swiper-wrapper">
+              {% for post in editor %}
+              <!-- swiper-slide-->
+              <div class="swiper-slide">
+                <div class="grid-post-item fl-wrap">
+                  <div class="grid-post-media gpm_sing">
+                    <div class="bg-wrap">
+                      <div class="bg" data-bg="{{post.bg_image.url}}"></div>
+                      <div class="overlay"></div>
+                    </div>
+                    <div class="grid-post-media_title">
+                      <a class="post-category-marker" href=""
+                        >{{post.category|title}}</a
+                      >
+                      <h4>
+                        <a href="{{post.get_absolute_url}}"
+                          >{{post.title|title|truncatewords:"10"}}</a
+                        >
+                      </h4>
+                      <span class="video-date"
+                        ><i class="far fa-clock"></i>
+                        <!---->
+                        {{post.timestamp|date:"jS F Y"}}</span
+                      >
+                      <ul class="post-opt">
+                        <li>
+                          <i class="far fa-comments-alt"></i> {{post.comments}}
+                        </li>
+                        <li><i class="fal fa-eye"></i> {{post.views}}</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- swiper-slide end-->
+              {% endfor %}
+            </div>
+            {% endif %}
+            <div class="sgs-pagination sgs_hor"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- box-widget  end -->
+  </div>
+  <!-- sidebar  end -->
+</div>
