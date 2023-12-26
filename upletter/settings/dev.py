@@ -20,9 +20,8 @@ INSTALLED_APPS += LOCAL_APPS
 INSTALLED_APPS += FRAMWORK_APPS
 
 
-TINYMCE_JS_URL = 'https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js'
 TINYMCE_COMPRESSOR = False
-
+TINYMCE_SPELLCHECKER = True
 TINYMCE_DEFAULT_CONFIG = {
     "height": "320px",
     "width": "960px",
