@@ -60,7 +60,7 @@ class Post(models.Model):
     cover_image = models.ImageField(upload_to='cover/', blank=True, null=True, help_text="for post detail banner")
     slug = models.SlugField(max_length=250, unique=True)
     summary = models.TextField(blank=True, null=True, max_length=1000)
-    content = models.TextField()
+    content = tinymce_models.HTMLField()
     timestamp = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     views = models.IntegerField(default=1)
