@@ -156,7 +156,9 @@
             </div>
             <div class="clearfix"></div>
 
-            <div class="single-post-content_text">{{post.content|safe}}</div>
+            <div class="single-post-content_text" id="font_chage">
+              {{post.content|safe}}
+            </div>
 
             <div class="single-post-footer fl-wrap">
               <div class="post-single-tags">
@@ -304,6 +306,7 @@
           </div>
           <!--comments end -->
         </div>
+        {% include "(shared)/banner.html" %}
       </div>
       <div class="col-md-4">
         <!-- sidebar   -->

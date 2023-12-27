@@ -23,8 +23,6 @@ INSTALLED_APPS += FRAMWORK_APPS
 TINYMCE_COMPRESSOR = False
 TINYMCE_SPELLCHECKER = True
 TINYMCE_DEFAULT_CONFIG = {
-    "height": "320px",
-    "width": "960px",
     "menubar": "file edit view insert format tools table help",
     "plugins": [
         'advlist', 'autolink', 'link', 'image', 'lists', 'charmap', 'preview', 'anchor', 'pagebreak',
@@ -35,9 +33,9 @@ TINYMCE_DEFAULT_CONFIG = {
     "aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor "
     "backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | "
     "fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | "
-    "a11ycheck ltr rtl | showcomments addcomment code",
+    '| styles | a11ycheck ltr rtl | showcomments addcomment code',
     "custom_undo_redo_levels": 10,
-    "language": "es_ES",  # To force a specific language instead of the Django current language.
+   # To force a specific language instead of the Django current language.
 }
 
 
@@ -54,3 +52,6 @@ CKEDITOR_CONFIGS = {
         ]
     }
 }
+
+
+CORS_ALLOW_ALL_ORIGINS = True

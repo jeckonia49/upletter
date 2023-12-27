@@ -15,11 +15,11 @@ class ItemNextPrevMixin:
 
     def get_prev_post(self, **kwargs):
         """This method return the previous item if any from the current object"""
-        return get_next_or_prev(self.queryset.objects.all(), self.get_post_object(**kwargs), self.prev_lookup)
+        return get_next_or_prev(self.queryset, self.get_post_object(**kwargs), self.prev_lookup)
     
     def get_next_post(self, **kwargs):
         """This method return the next item if any from the current object"""
-        return get_next_or_prev(self.queryset.objects.all(), self.get_post_object(**kwargs), self.next_lookup)
+        return get_next_or_prev(self.queryset, self.get_post_object(**kwargs), self.next_lookup)
 
     def get_context_data(self, **kwargs):
         """This context dictionary will currry the dictionary to the child class"""

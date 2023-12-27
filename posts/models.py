@@ -72,7 +72,7 @@ class Post(models.Model):
 
     
     class Meta:
-        ordering=['-timestamp']
+        ordering=('-timestamp', "pk")
         get_latest_by = "timestamp"
 
     def get_absolute_url(self):

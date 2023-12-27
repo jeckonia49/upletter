@@ -71,8 +71,9 @@ class PostDetailView(ItemNextPrevMixin, CategoryMixin, TemplateView):
         return context
     
     def get(self, request: HttpRequest, *args, **kwargs):
-        self.get_post_object(**kwargs).views += 1
-        self.get_post_object(**kwargs).save()
+        post = self.get_post_object(**kwargs)
+        post.views += 1
+        post.save()
         return super().get(request, *args, **kwargs)
 
 class PostDetailCommentCreateView(SuccessUrlRedirect, View):

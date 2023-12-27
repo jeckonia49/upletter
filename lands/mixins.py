@@ -1,5 +1,5 @@
 from django.core.paginator import PageNotAnInteger, Paginator, EmptyPage
-
+from next_prev import next_in_order, prev_in_order
 
 
 class HomeGridLandingMixin:
@@ -82,28 +82,29 @@ class PaginationMixin:
         context['page_range'] = page_range
         context['is_paginated'] = page.has_other_pages()
         return context
-    
+
 def get_next_or_prev(queryset, item, direction):
     """
     This function is to help in the getting the ext and the previous itme from the current itme
     Direction == prev (for previous item if any)
     Direction == next (for next item if any)
     """
-    getit=False
-    if direction == "prev":
-        queryset = queryset.reverse()
-    elif direction == "next":
-        queryset = queryset
-    for obj in queryset:
-        if getit:
-            return obj
-        if item == obj:
-            getit = True
-    if getit:
-        # this will happend when the last item 
-        # made getiit true
-        return queryset[0]
-    return False
+    queryset = queryset.objects.all().order_by("-timestamp", '-pk')
+    current_item = item
+    # filter items based on the direction
+    if direction == "next":
+        # am using the buildt in django next or prev look up for the model
+        # custom did make but its long code
+        next_item = next_in_order(current_item, qs=queryset)
+        return next_item
+    elif direction == "prev":
+        prev_item = prev_in_order(current_item, qs=queryset, loop=True)
+        return prev_item
+    else:
+        return current_item
+    
+
+
 
 
     
