@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+<!---->
+{% load static %}
+<!---->
+<!---->
+
+{% block content %}
+
+<div class="breadcrumbs-header fl-wrap">
+  <div class="container">
+    <div class="breadcrumbs-header_url">
+      <a href="{% url 'home' %}">Home</a
+      ><a href="{% url 'shops:shop_view' %}">Our Shop</a><span>Payment</span>
+    </div>
+    <div class="scroll-down-wrap btn-uc-md">
+      <div class="mousey">
+        <div class="scroller"></div>
+      </div>
+      <span>Scroll Down To Discover</span>
+    </div>
+  </div>
+  <div class="pwh_bg"></div>
+</div>
+<!--section   -->
+<section>
+  <div class="container">
+    <!-- CHECKOUT TABLE -->
+    <div class="row">
+      <div class="col-md-8">
+        <h4 class="cart-title">Your Information</h4>
+        <form class="custom-form" method="post" action="{% url 'shops:place_order' %}">
+            {% csrf_token %}
+          <fieldset>
+            <div class="row">
+              <div class="col-sm-6">
+               {{form.full_name}}
+              </div>
+              <div class="col-sm-6">
+                {{form.email}}
+              </div>
+              <div class="col-sm-6">
+               {{form.phone}}
+              </div>
+              <div class="col-sm-6">
+                {{form.city}}
+              </div>
+            <div class="clearfix"></div>
+            <button
+              class="btn color-bg float-btn"
+              type="submit"
+              >
+              Confirm and Pay <i class="fas fa-caret-right"></i>
+            </button>
+          </fieldset>
+        </form>
+      </div>
+       <div class="col-md-4">
+        <!-- CART TOTALS  -->
+        <div class="cart-totals fl-wrap">
+          <h3>Cart Totals</h3>
+          {% include "shop/cart/cart_summary.html" %}
+          <button onclick="location.href='{% url "shops:cart_view" %}'" role="link" type="submit" class="cart-totals_btn color-bg">
+              Back to shop
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- /CHECKOUT TABLE -->
+  </div>
+</section>
+
+<!-- section  -->
+{% include "(shared)/banner.html" %}
+<!-- section end -->
+
+{% endblock content %}

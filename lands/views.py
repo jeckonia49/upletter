@@ -8,20 +8,21 @@ from django.contrib import messages
 from .models import Subscription
 # Create your views here.
 
-
 class HomeLandinView(HomeGridLandingMixin, HomeTopLandinMixin, TemplateView):
+    """The inheritance caries the post for the grids"""
+    """This form of inheritance makes this code easi to read and undersatand"""
     template_name = "index.html"
     queryset = Post
 
     def get_main_hero(self, **kwargs):
+        """main hero slider"""
         return self.queryset.objects.all().order_by("-timestamp")
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        """The other grid posts are with tthe super dictionary"""
         context["main"] = self.get_main_hero(**kwargs)
         return context
-    
-
     
 class ContactUsView(SuccessUrlRedirect, View):
     form_class = ContactForm

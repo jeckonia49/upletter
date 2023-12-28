@@ -1,5 +1,7 @@
 {% extends "base.html" %} {% load static %}
-
+<!---->
+{% block title %} {{post.title}} {% endblock title %}
+<!---->
 <!---->
 {% block content %}
 
@@ -160,19 +162,7 @@
               {{post.content|safe}}
             </div>
 
-            <div class="single-post-footer fl-wrap">
-              <div class="post-single-tags">
-                <span class="tags-title"
-                  ><i class="fas fa-tag"></i> Tags :
-                </span>
-                <div class="tags-widget">
-                  <a href="#">Science</a>
-                  <a href="#">Technology</a>
-                  <a href="#">Business</a>
-                  <a href="#">Lifestyle</a>
-                </div>
-              </div>
-            </div>
+            {% include "posts/sections/tags.html" %}
 
             <!-- single-post-nav"   -->
             <div class="single-post-nav fl-wrap">
@@ -306,7 +296,6 @@
           </div>
           <!--comments end -->
         </div>
-        {% include "(shared)/banner.html" %}
       </div>
       <div class="col-md-4">
         <!-- sidebar   -->
@@ -363,6 +352,9 @@
     <div class="limit-box fl-wrap"></div>
   </div>
 </section>
+<!-- section end -->
+<!-- section  -->
+{% include "(shared)/banner.html" %}
 <!-- section end -->
 {% endblock content %}
 <!---->

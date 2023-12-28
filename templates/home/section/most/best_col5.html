@@ -3,7 +3,11 @@
   <div class="list-post-wrap list-post-wrap_column list-post-wrap_column_fw">
     <!--list-post-->
     <div class="list-post fl-wrap">
-      <a class="post-category-marker" href="#">Sports</a>
+      <a
+        class="post-category-marker"
+        href="{{main_g2.category.get_absolute_url}}"
+        >{{main_g2.category.name|truncatewords:"2"}}</a
+      >
       <div class="list-post-media">
         <a href="{{main_g2.get_absolute_url}}">
           <div class="bg-wrap">
@@ -29,7 +33,7 @@
           <li><i class="fal fa-eye"></i> {{main_g2.views}}</li>
         </ul>
         <div class="author-link">
-          <a href=""
+          <a href="{{main_g2.profile.get_absolute_url}}"
             ><img src="{% static 'images/avatar/1.jpg' %}" alt="" />
             <span>By {{main_g2.profile.get_full_name}}</span></a
           >
@@ -38,6 +42,6 @@
     </div>
     <!--list-post end-->
   </div>
-  <a href="" class="dark-btn fl-wrap"> Read all News </a>
+  <a href="{% url 'posts:posts' %}" class="dark-btn fl-wrap"> Read all News </a>
 </div>
 {% endif %}

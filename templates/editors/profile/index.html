@@ -53,14 +53,20 @@
                 <h5 class="order-money">{{post.comments|intword}}</h5>
               </td>
               <td class="pr-remove hidden-xs">
-                <button><i class="fas fa-times"></i></button>
+                <form method="post" action="{{post.get_delete_url}}">
+                  {% csrf_token %}
+                  <input type="hidden" name="post_slug" value="{{post.slug}}" />
+                  <button type="submit" class="remove-from-cart-btn">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </form>
               </td>
             </tr>
             {% endfor %}
           </tbody>
         </table>
         <!-- COUPON -->
-        <div class="coupon-holder fl-wrap hidden-xs">
+        <div class="coupon-holder fl-wrap hidden-xs d-none">
           <input type="text" name="cartcoupon" placeholder="Coupon code" />
           <button type="submit" class="btn-a">Apply</button>
           <button type="submit" class="pull-right btn-uc">Update Cart</button>

@@ -1,6 +1,9 @@
 {% extends "base.html" %} {% load static %}
 
 <!---->
+{% block title %} {{ block.super }} Posts Page {% endblock title %}
+<!---->
+<!---->
 {% block content %}
 
 <!--section   -->
@@ -14,7 +17,7 @@
     </div>
     <div class="clearfix"></div>
     <div class="breadcrumbs-list fl-wrap">
-      <a href="#">Home</a> <span>Blog List style</span>
+      <a href="{% url 'home' %}">Home</a> <span>Blog List style</span>
     </div>
     <div class="scroll-down-wrap scw_transparent">
       <div class="mousey">
@@ -41,17 +44,17 @@
           <div class="section-title">
             <h3>Sorty by:</h3>
             <div class="steader_opt steader_opt_abs">
-              <select
-                name="filter"
-                id="list"
-                data-placeholder="Persons"
-                class="style-select no-search-select"
-              >
-                <option>Latest</option>
-                <option>Most Read</option>
-                <option>Most Viewed</option>
-                <option>Most Commented</option>
-              </select>
+              <form action="{% url 'posts:posts' %}" method="get">
+                <select
+                  name="filter_posts"
+                  class="style-select no-search-select"
+                >
+                  <option value="Latest">Latest</option>
+                  <option value="Most Read">Most Read</option>
+                  <option value="Most Viewed">Most Viewed</option>
+                  <option value="Most Commented">Most Commented</option>
+                </select>
+              </form>
             </div>
           </div>
 

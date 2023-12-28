@@ -8,6 +8,10 @@ from .mixins import ModifiedLoginRequiredMixin, HandleProfileObjectMixin
 from accounts.forms import ProfileForm, SocialProfileForm, socialFormSet
 from accounts.views import SuccessUrlRedirect
 from django.http import HttpResponseRedirect
+from lands.mixins import ObjectMixin
+from django.contrib.auth import get_user
+from django.contrib import messages
+
 
 class EditorPublicView(PaginationMixin, TemplateView):
     queryset = Post
@@ -27,14 +31,36 @@ class EditorPublicView(PaginationMixin, TemplateView):
         context['editor'] = self.get_profile(**kwargs)
         return context
 
-
-
-
 class EditorPrivateView(ModifiedLoginRequiredMixin, HandleProfileObjectMixin):
     """This is the main class to be passed on to the views"""
     template_name = "editors/profile/index.html"
     profile = Profile
 
+# create a view for the deletion of the post by the writer from the frontend
+class EditorPrivateDeletePostView(
+    SuccessUrlRedirect, 
+    ModifiedLoginRequiredMixin, 
+    View
+    ):
+    """This kind of inheritance allow for enhnaced and reduced code duplication and improved code quality and ease of
+    maintenace
+    """
+    # this require looup field and the queryset to filter
+    lookup_slug_field = "post_slug"
+
+    queryset = Post
+
+    def post(self, request, *args, **kwargs):
+        # this is where the deletion will occur
+        """Get the post slug from the post request: we need to model form"""
+        post_slug = request.POST.get("post_slug")
+        """now get the post """
+        post = self.queryset.objects.get(profile=get_user(self.request).user_profile, slug=post_slug)
+        """This function comes from SuccessUrlRedirect"""
+        # delete the post
+        post.delete()
+        messages.success(request, "Your post was successfully deleted")
+        return self.get_success_url(*args, **kwargs)
 
 class EditorUpdatePrivateView(ModifiedLoginRequiredMixin, HandleProfileObjectMixin, SuccessUrlRedirect):
     """This is the update view"""
@@ -56,8 +82,8 @@ class EditorUpdatePrivateView(ModifiedLoginRequiredMixin, HandleProfileObjectMix
             instance = form.save(commit=False)
             instance.user=self.request.user
             form.save()
+            messages.success(self.request, "Your Profile was updated successfully")
             return self.get_success_url(*args, **kwargs)
-
 
 class SocialFormCreateView(HandleProfileObjectMixin, SuccessUrlRedirect):
     template_name = "editors/profile/update.html"

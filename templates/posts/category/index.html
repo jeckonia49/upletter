@@ -1,5 +1,6 @@
 {% extends "base.html" %} {% load static %}
-
+<!---->
+{% block title %} {{ block.super }} {{category.name}} {% endblock title %}
 <!---->
 {% block content %}
 <!---->
@@ -10,7 +11,7 @@
   </div>
   <div class="container">
     <div class="hero-section_title">
-      <h2>Category - List Column Style</h2>
+      <h2>Category | {{category.name}}</h2>
     </div>
     <div class="clearfix"></div>
     <div class="breadcrumbs-list fl-wrap">
@@ -62,9 +63,6 @@
           <div class="clearfix"></div>
           {% if is_paginated %}
 
-          <button class="load-more_btn" id="load_more_posts">
-            <i class="fal fa-undo"></i>Load More
-          </button>
           <!--pagination-->
           {% include "(shared)/pagination.html" %}
           <!--pagination end-->

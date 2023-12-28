@@ -37,7 +37,11 @@
             <div class="col-md-6">
               <!--list-post-->
               <div class="list-post fl-wrap">
-                <a class="post-category-marker" href="">{{post.category}}</a>
+                <a
+                  class="post-category-marker"
+                  href="{{post.category.get_absolute_url}}"
+                  >{{post.category}}</a
+                >
                 <div class="list-post-media">
                   <a href="{{post.get_absolute_url}}">
                     <div class="bg-wrap">
@@ -80,13 +84,18 @@
                   <div class="grid-post-media gpm_sing">
                     <div class="bg" data-bg="{{post.bg_image.url}}"></div>
                     <div class="author-link">
-                      <a href=""
-                        ><img src="{% static 'images/avatar/2.jpg' %}" alt="" />
+                      <a href="{{post.profile.get_absolute_url}}"
+                        ><img
+                          src="{% static 'images/avatar/2.jpg' %}"
+                          alt="{{post.profile.get_full_name}}"
+                        />
                         <span>By {{post.profile.get_full_name}}</span></a
                       >
                     </div>
                     <div class="grid-post-media_title">
-                      <a class="post-category-marker" href=""
+                      <a
+                        class="post-category-marker"
+                        href="{{post.category.get_absolute_url}}"
                         >{{post.category|title}}</a
                       >
                       <h4>
@@ -125,7 +134,11 @@
             <div class="col-md-6">
               <!--list-post-->
               <div class="list-post fl-wrap">
-                <a class="post-category-marker" href="">{{post.category}}</a>
+                <a
+                  class="post-category-marker"
+                  href="{{post.category.get_absolute_url}}"
+                  >{{post.category}}</a
+                >
                 <div class="list-post-media">
                   <a href="{{post.get_absolute_url}}">
                     <div class="bg-wrap">

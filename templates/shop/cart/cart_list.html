@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+<!---->
+{% load static %}
+<!---->
+<!---->
+
+{% block content %}
+
+<div class="breadcrumbs-header fl-wrap">
+  <div class="container">
+    <div class="breadcrumbs-header_url">
+      <a href="{% url 'home' %}">Home</a
+      ><a href="{% url 'shops:shop_view' %}">Our Shop</a><span>Your Cart</span>
+    </div>
+    <div class="scroll-down-wrap btn-uc-md">
+      <div class="mousey">
+        <div class="scroller"></div>
+      </div>
+      <span>Scroll Down To Discover</span>
+    </div>
+  </div>
+  <div class="pwh_bg"></div>
+</div>
+
+<!--section   -->
+<section>
+  <div class="container">
+    <!-- CHECKOUT TABLE -->
+    <div class="row">
+      <div class="col-md-8">
+        <h4 class="cart-title">Your Cart:</h4>
+        {% if cart_products %}
+        <table class="table table-border checkout-table">
+          <tbody>
+            <tr>
+              <th class="hidden-xs">Item</th>
+              <th>Name</th>
+              <th class="hidden-xs">Price</th>
+              <th class="hidden-xs">Count</th>
+              <th>Total</th>
+              <th class="hidden-xs">Action</th>
+            </tr>
+            {% for cart in cart_products %}
+            <tr>
+              <td class="hidden-xs">
+                <a href="{{cart.product.get_absolute_url}}"
+                  ><img src="{{cart.product.image.url}}" alt="" class="respimg"
+                /></a>
+              </td>
+              <td>
+                <h5 class="product-name">
+                  {{cart.product.name|truncatewords:"4"}}
+                </h5>
+              </td>
+              <td class="hidden-xs">
+                <h5 class="order-money">${{cart.product.get_selling_price}}</h5>
+              </td>
+              <td>
+                <input
+                  type="number"
+                  name="cartin1"
+                  value="{{cart.item_count}}"
+                  max="50"
+                  min="1"
+                  class="order-count"
+                  disabled
+                  style="background-color: transparent"
+                />
+              </td>
+              <td>
+                <h5 class="order-money">
+                  ${{cart.product.get_product_sum_total}}
+                </h5>
+              </td>
+              <td class="pr-remove">
+                <form
+                  method="post"
+                  action="{{cart.product.get_remove_from_cart_url}}"
+                >
+                  {% csrf_token %}
+                  <button type="submit" class="remove-from-cart-btn">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% endif %}
+        <!-- COUPON -->
+        <div class="coupon-holder fl-wrap d-none">
+          <input type="text" name="cartcoupon" placeholder="Coupon code" />
+          <button type="submit" class="btn-a">Apply</button>
+          <button type="submit" class="pull-right btn-uc btn-uc-md">
+            Update Cart
+          </button>
+        </div>
+        <!-- /COUPON -->
+      </div>
+      <div class="col-md-4">
+        <!-- CART TOTALS  -->
+        <div class="cart-totals fl-wrap">
+          <h3>Cart Totals</h3>
+          {% include "shop/cart/cart_summary.html" %}
+          <button onclick="location.href='{% url "shops:place_order" %}'" role="link" type="submit" class="cart-totals_btn color-bg">
+              Proceed to Checkout
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- /CHECKOUT TABLE -->
+  </div>
+</section>
+
+<!-- section  -->
+{% include "(shared)/banner.html" %}
+<!-- section end -->
+
+{% endblock content %}

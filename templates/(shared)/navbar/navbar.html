@@ -1,5 +1,11 @@
 {% load static %}
 <!---->
+<style>
+  .header-tooltip {
+    border: none !important;
+    outline: none !important;
+  }
+</style>
 {% load flatpages %}
 
 <header class="main-header">
@@ -19,7 +25,7 @@
       </div>
       <!-- logo holder end -->
       {% if request.user.is_authenticated and request.user.is_editor %}
-      <div class="search_btn htact">
+      <div class="search_btn htact btn-uc-md">
         <i class="fa fa-cog"></i>
         <a href="{% url 'editors:profile' %}" class="header-tooltip">Profile</a>
       </div>
@@ -32,7 +38,6 @@
         <form action="{% url 'accounts:logout' %}" method="post">
           {% csrf_token %}
           <button class="header-tooltip">Sign Out</button>
-          <button class="header-tooltip">Sign Out</button>
           <hr />
         </form>
         {% else %}
@@ -42,22 +47,29 @@
         <!---->
       </div>
 
+      {% if request.user.is_authenticated %}
+      <!---->
+      {% if request.user.user_profile.get_cart_items %}
+      <!---->
+
+      <div class="show-cart sc_btn htact">
+        <i class="fal fa-shopping-bag"></i
+        ><span class="show-cart_count"
+          >{{request.user.user_profile.get_cart_items.count}}</span
+        ><span class="header-tooltip">Your Cart</span>
+      </div>
+
+      <!-- header-cart_wrap  -->
+      {% include "shop/cart.html" %}
+      <!-- header-cart_wrap end  -->
+      {% endif %}
+      <!---->
+      {% endif %}
+
       <!-- header-search-wrap -->
       <div class="header-search-wrap novis_sarch">
         <div class="widget-inner">
-          <form action="{% url 'posts:post_search' %}" method="get">
-            <input
-              name="post_qs"
-              id="se"
-              type="text"
-              class="search"
-              placeholder="Search..."
-              value=""
-            />
-            <button class="search-submit" type="submit" id="submit_btn">
-              <i class="fa fa-search transition"></i>
-            </button>
-          </form>
+          {% include "(shared)/navbar/search_form.html" %}
         </div>
       </div>
       <!-- header-search-wrap end -->
@@ -77,18 +89,19 @@
             <li>
               <a href="{% url 'posts:posts' %}">News</a>
             </li>
-            <li><a href="">Business</a></li>
-            <li><a href="">Technology</a></li>
+            {% if header_categories %}
+            <!---->
+            {% for category in header_categories %}
             <li>
-              <a href="#">Shop <i class="fas fa-caret-down"></i></a>
-              <!--second level -->
-              <ul>
-                <li><a href="">Products</a></li>
-                <li><a href="">Product Single</a></li>
-                <li><a href="">Cart</a></li>
-                <li><a href="">Checkout</a></li>
-              </ul>
-              <!--second level end-->
+              <a href="{{category.get_absolute_url}}"
+                >{{category.name|title}}</a
+              >
+            </li>
+            {% endfor %}
+            <!---->
+            {% endif %}
+            <li>
+              <a href="{% url 'shops:shop_view' %}">Shop</a>
             </li>
             {% get_flatpages as flatpages %}
             <li>

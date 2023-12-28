@@ -9,24 +9,19 @@ class AdminGenre(admin.ModelAdmin):
     list_display = ['name']
     prepopulated_fields = {"slug":("name",)}
 
-
 @admin.register(Category)
 class AdminCategory(admin.ModelAdmin):
-    list_display = ['genre', 'name']
+    list_display = ['genre', 'name', 'icon']
     prepopulated_fields = {"slug":("name",)}
-
-
 
 @admin.register(Tag)
 class AdminTag(admin.ModelAdmin):
     list_display = ['name',]
     prepopulated_fields = {"slug": ("name",)}
 
-
 class PostSlideImageInline(admin.StackedInline):
     model = PostImageSlide
     extra = 0
-
 
 @admin.register(Post)
 class AdminPost(admin.ModelAdmin):
@@ -44,7 +39,6 @@ class AdminPost(admin.ModelAdmin):
         "profile","category",
     ]
     inlines = [PostSlideImageInline, ]
-
 
 @admin.register(PostComment)
 class AdminPostComment(admin.ModelAdmin):

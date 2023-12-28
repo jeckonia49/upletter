@@ -2,7 +2,8 @@ import os
 from dotenv import load_dotenv
 from pathlib import Path
 
-load_dotenv()
+load_dotenv() # load secret variable: Not advisable for production secrete viariab le nto to be send on code repositiories jsut on like path
+# mime are in .env whihc is not committed to github as its ignored by gitignore
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -15,7 +16,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY", "")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# will be turned oof on the sevrer
+DEBUG = False
+
+# will add domain name, at now the asterick capture all the domain
 
 ALLOWED_HOSTS = ["*", "localhost"]
 
@@ -40,6 +44,7 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
      "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    # for corsheraders to allow for different site oriign 
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -64,6 +69,10 @@ TEMPLATES = [
 
                 # site context processors
                 "upletter.context_processors.site_context_processor_data",
+
+                # app context processors
+                "posts.context_processor.post_context_processor_data",
+                "shop.context_processor.shop_context_processor_data",
             ],
         },
     },
@@ -75,14 +84,14 @@ WSGI_APPLICATION = "upletter.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-if DEBUG:
+if DEBUG: # use sqlite in development when the debug is off that is
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
             "NAME": BASE_DIR / "db.sqlite3",
         }
     }
-else:
+else: # use postrgres ion production when the debug is off that is
     DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",

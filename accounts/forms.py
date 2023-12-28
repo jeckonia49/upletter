@@ -37,7 +37,6 @@ class UserCreationForm(forms.ModelForm):
             user.save()
         return user
 
-
 class UserChangeForm(forms.ModelForm):
     """A form for updating users. Includes all the fields on
     the user, but replaces the password field with admin's
@@ -56,7 +55,6 @@ class UserChangeForm(forms.ModelForm):
         # field does not have access to the initial value
         return self.initial["password"]
 
-
 class LoginModalForm(forms.Form):
     email = forms.EmailField(max_length=100, label="Email Address", widget=forms.EmailInput(attrs={"class": "form-control"}))
     password = forms.CharField(max_length=100, label="Password", widget=forms.PasswordInput(attrs={"class": "form-control"}))
@@ -67,7 +65,6 @@ class LoginModalForm(forms.Form):
     def cleaned_password(self):
         return self.cleaned_data.get("password")
     
-
 class RegisterModalForm(UserCreationForm):
     agree_to_terms = forms.BooleanField(widget=forms.CheckboxInput(attrs={"class": "mr-10"}), required=True, label="terms and conditions")
 

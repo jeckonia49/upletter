@@ -6,7 +6,7 @@
   <head>
     <!--=============== basic  ===============-->
     <meta charset="UTF-8" />
-    <title>{% block title %}{% endblock title %}</title>
+    <title>{% block title %}newzfox website{% endblock title %}</title>
     <meta name="robots" content="index, follow" />
     <meta name="keywords" content="" />
     <meta name="description" content="" />
@@ -36,6 +36,33 @@
 
     <!--=============== favicons ===============-->
     <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
+    <style>
+      .remove-from-cart-btn {
+        background-color: inherit;
+        outline: none !important;
+        border: none !important;
+        font-size: 20px;
+        cursor: pointer;
+        padding: 10px;
+        align-self: flex-end;
+        color: inherit;
+      }
+      .remove-from-cart-btn-form {
+        cursor: pointer;
+      }
+      @media screen and (max-width: 400px) {
+        .btn-uc-md {
+          display: none !important;
+        }
+      }
+      .d-none {
+        display: none !important;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.css"
+    />
   </head>
   <body>
     <!-- main start  -->
@@ -57,29 +84,20 @@
         <!-- footer -->
         {% include "(shared)/footer.html" %}
         <!-- footer end-->
+        {% if aside_category %}
         <div class="aside-panel">
           <ul>
+            {% for category in aside_category %}
             <li>
-              <a href="#"><i class="far fa-podium"></i><span>Politics</span></a>
-            </li>
-            <li>
-              <a href="#"><i class="far fa-atom"></i><span>Technology</span></a>
-            </li>
-            <li>
-              <a href="#"
-                ><i class="far fa-user-chart"></i><span>Business</span></a
+              <a href="{{category.get_absolute_url}}"
+                ><i class="far {{category.get_icon_display}}"></i
+                ><span>{{category.name}}</span></a
               >
             </li>
-            <li>
-              <a href="#"
-                ><i class="far fa-tennis-ball"></i><span>Sports</span></a
-              >
-            </li>
-            <li>
-              <a href="#"><i class="far fa-flask"></i><span>Science</span></a>
-            </li>
+            {% endfor %}
           </ul>
         </div>
+        {% endif %}
       </div>
       <!-- wrapper end -->
       <!-- cookie-info-bar -->
@@ -106,15 +124,17 @@
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/plugins.js' %}"></script>
     <script src="{% static 'js/scripts.js' %}"></script>
-
-    <script
-      src="https://cdn.jsdelivr.net/npm/jdenticon@3.2.0/dist/jdenticon.min.js"
-      async
-      integrity="sha384-yBhgDqxM50qJV5JPdayci8wCfooqvhFYbIKhv0hTtLvfeeyJMJCscRfFNKIxt43M"
-      crossorigin="anonymous"
-    ></script>
-
     <script src="{% static 'js/custom.js' %}"></script>
     <script defer src="{% static 'js/dist/jdenticon.min.js' %}"></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"
+    ></script>
+    {% if messages %} {% for message in messages %}
+    <script>
+      toastr.{{ message.tags }}('{{ message }}');
+    </script>
+    {% endfor %} {% endif %}
   </body>
 </html>

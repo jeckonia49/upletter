@@ -1,0 +1,54 @@
+{% for product in posts %}
+<!--   shop-item-->
+<div class="col-md-6">
+  <div class="det-box">
+    <a href="{{product.get_absolute_url}}" class="det-box-media"
+      ><span>Details</span
+      ><img src="{{product.image.url}}" alt="" class="respimg" />
+      {% if product.get_percentage_discount %}
+      <div class="detbox_notifer">
+        Sale -{{product.get_percentage_discount}}
+      </div>
+      {% endif %}
+    </a>
+    <div class="det-box-ietm dbig dbi_shop fl-wrap">
+      <h3>
+        <a href="{{product.get_absolute_url}}"
+          >{{product.name|truncatewords:"5"}}</a
+        >
+      </h3>
+      <p>{{product.description|truncatewords:"10"}}</p>
+      <div class="reviews_counter_wrap">
+        <div class="star-rating" data-starrating="5"></div>
+        <div class="reviews_counter_wrap_text">
+          {{product.reviews}} review{{product.reviews|pluralize}}
+        </div>
+      </div>
+      <div class="grid-item_price fl-wrap">
+        <span class="grid-item_price_item"
+          >Selling Price: <strong>${{product.get_selling_price}}</strong></span
+        >
+        <div class="add_cart">
+          <form action="{{product.get_add_to_cart_url}}" method="post">
+            {% csrf_token %}
+            <button
+              type="submit"
+              style="
+                border: none !important;
+                outline: none !important;
+                background-color: transparent;
+                cursor: pointer;
+                color: inherit;
+              "
+            >
+              <i class="fal fa-plus"></i>
+              <span>Add To Cart</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--   shop-item end-->
+{% endfor %}

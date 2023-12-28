@@ -7,6 +7,13 @@ from django.urls import reverse
 from lands.models import ItemThreeAbstractModel
 from ckeditor.fields import RichTextField
 
+class CategoryIcon(models.TextChoices):
+    FA_PODIUM = "F_PODIUM", "fa-podium"
+    FA_ATOM = "F_ATOM", "fa-atom"
+    FA_USER_CHART = "F_USER_CHART", "fa-user-chart"
+    FA_TENNIS_BALL = "F_TENNIS_BALL", "fa-tennis-ball"
+    FA_FLASK = "F_FLASK", "fa-flask"
+    FA_HEART = "F_HEART", "fa-heart"
 
 class GenreCategoryAbstract(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -35,6 +42,7 @@ class Genre(GenreCategoryAbstract):
     
 class Category(GenreCategoryAbstract):
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE, related_name="category_genre")
+    icon = models.CharField(max_length=100, choices=CategoryIcon.choices,blank=True, null=True, unique=True)
     
     class Meta:
         verbose_name = "category"
@@ -78,6 +86,10 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse("posts:post_detail", kwargs={"post_slug": self.slug})
     
+    def get_delete_url(self):
+        # this will ensure clean code than doing the deletion via chaningn methos in the views
+        return reverse("editors:post_delete_view", kwargs={"post_slug": self.slug})
+    
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
@@ -90,7 +102,6 @@ class Post(models.Model):
     def get_post_comment(self):
         return self.post_comment.all().order_by("-id")
     
-
 class PostImageSlide(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="post_postimageslides")
     image = models.ImageField(upload_to="post/slides/")

@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+<!---->
+{% block title %} {{ block.super }} Shop {% endblock title %}
+<!---->
+<!---->
+{% load static %}
+<!---->
+<!---->
+
+{% block content %}
+
+<div class="breadcrumbs-header fl-wrap">
+  <div class="container">
+    <div class="breadcrumbs-header_url">
+      <a href="{% url 'shops:shop_view' %}">Home</a><span>Our Shop</span>
+    </div>
+    <div class="scroll-down-wrap">
+      <div class="mousey">
+        <div class="scroller"></div>
+      </div>
+      <span>Scroll Down To Discover</span>
+    </div>
+  </div>
+  <div class="pwh_bg"></div>
+</div>
+<!--section   -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="main-container fl-wrap fix-container-init">
+          <!--Filtration header-->
+          {% include "shop/filter_header.html" %}
+          <!--Filtration header-->
+          {% if posts %}
+          <!--   row-->
+          <div class="row">{% include "shop/products.html" %}</div>
+          <!--  row end-->
+          {% endif %}
+          <!---->
+          {% if is_paginated %}
+          <!--pagination-->
+          {% include "(shared)/pagination.html" %}
+          <!--pagination end-->
+          {% endif %}
+        </div>
+      </div>
+      <!-- sidebar   -->
+      <div class="col-md-4">
+        <div class="sidebar-content fl-wrap fixed-bar">
+          <!-- box-widget -->
+          {% include "shop/(shared)/search.html" %}
+          <!-- box-widget  end -->
+          <!-- box-widget -->
+          {% include "shop/(shared)/price_filter.html" %}
+          <!-- box-widget  end -->
+          <!-- box-widget -->
+          {% if popular_product %} {% include "shop/(product)/popular.html" %}
+          {% endif %}
+          <!-- box-widget  end -->
+          <!-- box-widget -->
+          <div class="box-widget fl-wrap">
+            {% include "(shared)/categories.html" %}
+          </div>
+          <!-- box-widget  end -->
+          <!-- box-widget -->
+          {% include "posts/tags.html" %}
+          <!-- box-widget  end -->
+        </div>
+      </div>
+      <!-- sidebar  end -->
+    </div>
+    <div class="limit-box fl-wrap"></div>
+  </div>
+</section>
+<!-- section end -->
+<!-- section  -->
+{% include "(shared)/banner.html" %}
+<!-- section end -->
+
+{% endblock content %}

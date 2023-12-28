@@ -7,9 +7,6 @@ from lands.forms import ContactForm
 # Define a new FlatPageAdmin
 
 
-
-
-
 @admin.register(FlatPage)
 class FlatPageAdmin(AdminFlatPage):
     fieldsets = (

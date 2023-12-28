@@ -39,7 +39,6 @@ class CategoryMixin:
         context['categories'] = self.get_all_categories()
         return context
     
-
 class ItemJsonListViewMixin:
     queryset = None
     

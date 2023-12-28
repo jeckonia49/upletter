@@ -1,0 +1,31 @@
+<div class="box-widget fl-wrap">
+  <div class="widget-title">Popular Products</div>
+  <div class="box-widget-content">
+    <div class="post-widget-container fl-wrap">
+      {% for product in popular_product %}
+      <!-- post-widget-item -->
+      <div class="post-widget-item fl-wrap">
+        <div class="post-widget-item-media">
+          <a href="{{product.get_absolute_url}}"
+            ><img src="{{product.image.url}}" alt=""
+          /></a>
+        </div>
+        <div class="post-widget-item-content">
+          <h4>
+            <a href="{{product.get_absolute_url}}"
+              >{{product.name|truncatewords:"4"}}</a
+            >
+          </h4>
+          <ul class="pwic_opt">
+            <li>
+              <i class="fas fa-barcode"></i
+              ><span>Price: ${{product.get_selling_price}}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- post-widget-item end -->
+      {% endfor %}
+    </div>
+  </div>
+</div>

@@ -5,6 +5,8 @@ from posts.models import PostComment
 
 
 class ItemThreeAbstractModelForm:
+    # this is a custom helepr form tha tha willl hold similar field for modek form to avoid duplication of code
+    # DRY Principle
     class Meta:
         fields = ['name', 'email', 'message']
         widgets = {
@@ -13,15 +15,14 @@ class ItemThreeAbstractModelForm:
             "message": forms.Textarea(attrs={"id": "message", "placeholder": "Sample content"}),
         }
 
-        
-
 class ContactForm(ItemThreeAbstractModelForm, forms.ModelForm):
+    # utilizine the helper form field holder
     class Meta:
         model = Contact
         fields = '__all__'
 
-
 class SubscriptionForm(forms.ModelForm):
+      # utilizine the helper form field holder
     class Meta:
         model = Subscription
         fields = ['email']

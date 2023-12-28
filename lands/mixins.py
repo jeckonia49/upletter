@@ -1,5 +1,6 @@
 from django.core.paginator import PageNotAnInteger, Paginator, EmptyPage
 from next_prev import next_in_order, prev_in_order
+from django.shortcuts import get_object_or_404
 
 
 class HomeGridLandingMixin:
@@ -45,12 +46,16 @@ class HomeTopLandinMixin:
         return context
     
 class PaginationMixin:
+    # This is a hlper class for pagination in the entire wite
+    # this helper alot in DRY Principle
+
     queryset = None
     page_kwargs = "page"
     paginate_by = 4
     context_object_name = ""
 
     def get_queryset_from_latest(self, **kwargs):
+        """This is the custom filter method subject to modification based on the seach"""
         return self.queryset.objects.all().order_by("-timestamp")
 
     def get_context_data(self, **kwargs):
@@ -89,7 +94,7 @@ def get_next_or_prev(queryset, item, direction):
     Direction == prev (for previous item if any)
     Direction == next (for next item if any)
     """
-    queryset = queryset.objects.all().order_by("-timestamp", '-pk')
+    queryset = queryset.objects.all()
     current_item = item
     # filter items based on the direction
     if direction == "next":
@@ -98,15 +103,21 @@ def get_next_or_prev(queryset, item, direction):
         next_item = next_in_order(current_item, qs=queryset)
         return next_item
     elif direction == "prev":
-        prev_item = prev_in_order(current_item, qs=queryset, loop=True)
+        prev_item = prev_in_order(current_item, qs=queryset)
         return prev_item
-    else:
-        return current_item
     
+class ObjectMixin:
+    queryset = None
+    lookup_slug_field = ""
 
+    def get_item_object(self, **kwargs):
+        """This method gets the current item(post)"""
+        return get_object_or_404(self.queryset, slug=kwargs.get(self.lookup_slug_field))
 
+class SearchQueryView:
+    search_query = ""
 
-
+    def get_search_query_term(self):
+        """Check the term filter and then  filter the queryset based on the search"""
+        return self.request.GET.get(self.search_query)
     
-
-

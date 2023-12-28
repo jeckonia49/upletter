@@ -1,0 +1,333 @@
+{% extends "base.html" %}
+<!---->
+<!---->
+{% block title %} {{ block.super }} | shop | {{product.name}}
+
+<!---->
+{% endblock title %}
+<!---->
+{% load static %}
+<!---->
+<style>
+  .qty_btn {
+    display: flex !important;
+    align-items: center;
+  }
+</style>
+<!---->
+
+{% block content %}
+
+<div class="breadcrumbs-header fl-wrap">
+  <div class="container">
+    <div class="breadcrumbs-header_url">
+      <a href="{% url 'shops:shop_view' %}">Home</a><span>Our Shop</span>
+    </div>
+    <div class="scroll-down-wrap">
+      <div class="mousey">
+        <div class="scroller"></div>
+      </div>
+      <span>Scroll Down To Discover</span>
+    </div>
+  </div>
+  <div class="pwh_bg"></div>
+</div>
+
+<!--section   -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="main-container fl-wrap fix-container-init">
+          <div class="shop-header-title fl-wrap">
+            <div class="row">
+              <div class="col-md-7">
+                <h2>
+                  {{product.name}} {% if product.get_percentage_discount %}
+                  <span>Sale -{{product.get_percentage_discount}}</span>
+                  {% endif %}
+                </h2>
+                <div class="shop-header-title_opt">
+                  <ul>
+                    <li>
+                      <span class="grid-item_price_item rent-price"
+                        >Amount:
+                        <strong>${{product.get_product_sum_total}}</strong>
+                      </span>
+                    </li>
+                    <li>
+                      <div class="reviews_counter_wrap">
+                        <div class="reviews_counter_wrap_text">
+                          {{product.reviews}}
+                          review{{product.reviews|pluralize}}
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="post-opt single_post-opt">
+                  <ul class="no-list-style">
+                    <li><i class="fal fa-eye"></i> <span>164</span></li>
+                    <li>
+                      <i class="fal fa-shopping-bag"></i>
+                      <span>
+                        {{cart.item_count|default:"0"}}
+                        Item{{cart.item_count|pluralize|default:"s"}}
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-5">
+                <div class="qty_btn">
+                  {% if product.items_in_stock %}
+                  <span>
+                    <form
+                      action="{{product.get_add_to_cart_url}}"
+                      method="post"
+                    >
+                      {% csrf_token %}
+                      <button
+                        type="submit"
+                        style="
+                          border: none !important;
+                          outline: none !important;
+                          cursor: pointer;
+                        "
+                        class="btn"
+                      >
+                        <span>Add To Cart</span>
+                        <i class="fas fa-caret-right"></i>
+                      </button>
+                    </form>
+                  </span>
+                  {% else %}
+
+                  <span>
+                    <span>Out of stock</span>
+                  </span>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- single-post-media   -->
+          <div class="single-post-media fl-wrap">
+            <div class="single-slider-wrap fl-wrap">
+              <div class="single-slider fl-wrap">
+                <div class="swiper-container">
+                  <div class="swiper-wrapper lightgallery">
+                    {% if product.get_product_image_slides %}
+                    <!---->
+                    {% for slide in product.get_product_image_slides %}
+                    <!-- swiper-slide   -->
+                    <div class="swiper-slide hov_zoom">
+                      <img
+                        src="{{slide.image.url}}"
+                        alt="{{slide.product.name}}"
+                      />
+                      <a
+                        href="{{slide.image.url}}"
+                        class="box-media-zoom popup-image"
+                        ><i class="fas fa-search"></i
+                      ></a>
+                    </div>
+                    <!-- swiper-slide end   -->
+                    {% endfor %}
+                    <!---->
+                    {% else %}
+                    <div class="swiper-slide hov_zoom">
+                      <img src="{{product.image.url}}" alt="{{product.name}}" />
+                      <a
+                        href="{{product.image.url}}"
+                        class="box-media-zoom popup-image"
+                        ><i class="fas fa-search"></i
+                      ></a>
+                    </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+              <div class="ss-slider-controls2">
+                <div class="ss-slider-pagination pag-style"></div>
+              </div>
+              <div class="ss-slider-cont ss-slider-cont-prev">
+                <i class="fas fa-caret-left"></i>
+              </div>
+              <div class="ss-slider-cont ss-slider-cont-next">
+                <i class="fas fa-caret-right"></i>
+              </div>
+            </div>
+          </div>
+          <!-- single-post-media end   -->
+
+          <!-- single-post-content   -->
+          <div class="single-post-content spc_column shop_post-content fl-wrap">
+            <div class="clearfix"></div>
+            <div class="single-post-content_column">
+              <div class="share-holder ver-share fl-wrap">
+                <div class="share-title">
+                  Share This <br />
+                  Product:
+                </div>
+                <div class="share-container isShare"></div>
+              </div>
+            </div>
+            <div class="single-post-content_text">
+              <p class="has-drop-cap">{{product.description|safe}}</p>
+            </div>
+            {% include "posts/sections/tags.html" %}
+          </div>
+          <div class="limit-box2 fl-wrap"></div>
+          <!-- single-post-content  end   -->
+          <!--comments  -->
+          <div id="comments" class="single-post-comm fl-wrap">
+            {% if product.get_product_reviews %}
+            <div class="pr-subtitle prs_big">
+              Review{{product.get_product_reviews.count|pluralize}}
+              <span>{{product.get_product_reviews.count}}</span>
+            </div>
+            <ul class="commentlist clearafix">
+              {% for review in product.get_product_reviews %}
+              <li class="comment">
+                <div class="comment-author">
+                  <svg
+                    width="80"
+                    height="80"
+                    data-jdenticon-value="review{{review.pk}}"
+                  ></svg>
+                </div>
+                <div class="comment-body smpar">
+                  <h4><a href="javascript:void(0)">{{review.full_name}}</a></h4>
+                  <span class="star-rating" data-starrating="5"></span>
+                  <div class="box-widget-menu-btn smact">
+                    <i class="far fa-ellipsis-h"></i>
+                  </div>
+                  <div class="show-more-snopt-tooltip bxwt">
+                    <a href="javascript:void(0)">
+                      <i class="fas fa-reply"></i> Reply</a
+                    >
+                    <a href="javascript:void(0)">
+                      <i class="fas fa-exclamation-triangle"></i>
+                      Report
+                    </a>
+                  </div>
+                  <div class="clearfix"></div>
+                  <p>{{review.review|safe}}</p>
+                  <a class="comment-reply-link" href="javascript:void(0)"
+                    ><i class="fas fa-reply"></i> Reply</a
+                  >
+                  <div class="comment-meta">
+                    <i class="far fa-clock"></i>
+                    <!---->
+                    {{review.timestamp|date:"jS F Y"}}
+                  </div>
+                  <div class="comment-body_dec"></div>
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+            <div class="clearfix"></div>
+            <div id="addcom" class="clearafix">
+              <div class="pr-subtitle">
+                Add Review<i class="fas fa-caret-down"></i>
+              </div>
+              <div class="comment-reply-form fl-wrap">
+                <form
+                  class="add-comment custom-form"
+                  method="post"
+                  action="{{product.get_product_review_url}}"
+                >
+                  {% csrf_token %}
+                  <fieldset>
+                    <div class="leave-rating-wrap fl-wrap">
+                      <span class="leave-rating-title"
+                        >Your rating for this product:
+                      </span>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">{{form.full_name}}</div>
+                      <div class="col-md-6">{{form.email}}</div>
+                    </div>
+                    {{form.review}}
+                  </fieldset>
+                  <button class="btn float-btn color-btn" type="submit">
+                    Submit Comment <i class="fas fa-caret-right"></i>
+                  </button>
+                </form>
+              </div>
+            </div>
+            <!--end respond-->
+          </div>
+          <!--comments end -->
+          {% if similar_products %}
+          <!--post-related-->
+          <div class="post-related fl-wrap">
+            <h6 class="item-related_title">You Might Also Like</h6>
+            <!-- post-related -->
+            <div class="row">
+              {% for product in similar_products %}
+
+              <!-- {{forloop.counter}}  -->
+              <div class="item-related col-md-4">
+                <a href="{{product.get_absolute_url}}"
+                  ><img src="{{product.image.url}}" alt=""
+                /></a>
+                <div class="item-related_content fl-wrap">
+                  <h3>
+                    <a href="{{product.get_absolute_url}}"
+                      >{{product.name|truncatewords:"3"}}</a
+                    >
+                  </h3>
+                  <ul class="pwic_opt">
+                    <li>
+                      <i class="fas fa-barcode"></i
+                      ><span>Price: ${{product.get_selling_price}}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <!-- {{forloop.counter}}  -->
+              {% endfor %}
+            </div>
+          </div>
+          <!-- post-related  end-->
+          {% endif %}
+        </div>
+      </div>
+      <!-- sidebar   -->
+      <div class="col-md-4">
+        <div class="sidebar-content fl-wrap fixed-bar">
+          <!-- box-widget -->
+          {% include "shop/(shared)/search.html" %}
+          <!-- box-widget  end -->
+          <!-- box-widget -->
+          {% include "shop/(shared)/price_filter.html" %}
+          <!-- box-widget  end -->
+          <!-- box-widget -->
+          {% if popular_product %} {% include "shop/(product)/popular.html" %}
+          {% endif %}
+          <!-- box-widget  end -->
+          <!-- box-widget -->
+          <div class="box-widget fl-wrap">
+            {% include "(shared)/categories.html" %}
+          </div>
+          <!-- box-widget  end -->
+          <!-- box-widget -->
+          {% include "posts/tags.html" %}
+          <!-- box-widget  end -->
+        </div>
+        <!-- sidebar  end -->
+      </div>
+    </div>
+    <div class="limit-box fl-wrap"></div>
+  </div>
+</section>
+<!-- section end -->
+<!-- section  -->
+{% include "(shared)/banner.html" %}
+<!-- section end -->
+
+{% endblock content %}

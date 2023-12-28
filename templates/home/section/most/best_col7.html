@@ -29,7 +29,11 @@
             <span class="post-media_title">&copy; Image Copyrights Title</span>
           </div>
           <div class="list-post-content">
-            <a class="post-category-marker" href="#">{{post.category}}</a>
+            <a
+              class="post-category-marker"
+              href="{{post.category.get_absolute_url}}"
+              >{{post.category}}</a
+            >
             <h3>
               <a href="{{post.get_absolute_url}}"
                 >{{post.title|truncatewords:"15"}}</a
@@ -46,7 +50,7 @@
               <li><i class="fal fa-eye"></i> {{post.views}}</li>
             </ul>
             <div class="author-link">
-              <a href=""
+              <a href="{{post.profile.get_absolute_url}}"
                 ><img
                   src="{% static 'images/avatar/1.jpg' %}"
                   alt="{{post.profile.get_full_name}}"

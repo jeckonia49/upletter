@@ -2,55 +2,57 @@
 
 <div class="header-cart_wrap novis_cart">
   <div class="header-cart_title">
-    Your Cart <span><strong>2</strong> items</span>
+    Your Cart
+    <span
+      ><strong>{{request.user.user_profile.get_cart_items.count}}</strong>
+      item{{request.user.user_profile.get_cart_items.count|pluralize}}</span
+    >
   </div>
   <div class="header-cart_wrap_container fl-wrap">
     <div class="box-widget-content">
       <div class="widget-posts fl-wrap">
         <ol>
+          {% for item in request.user.user_profile.get_cart_items %}
           <li class="clearfix">
-            <a href="#" class="widget-posts-img"
-              ><img
-                src="{% static 'images/shop/1.jpg' %}"
-                class="respimg"
-                alt=""
+            <a href="{{item.product.get_absolute_url}}" class="widget-posts-img"
+              ><img src="{{item.product.image.url}}" class="respimg" alt=""
             /></a>
             <div class="widget-posts-descr">
-              <a href="#" title="">Awesome Merch Wallet</a>
+              <a href="{{item.product.get_absolute_url}}" title=""
+                >{{item.product.name|truncatewords:"4"}}</a
+              >
               <div class="widget-posts-descr_calc clearfix">
-                1 <span>x</span> $845
+                {{item.item_count}}
+                <span> X </span>
+                ${{item.product.get_selling_price}}
               </div>
             </div>
             <div class="clear-cart_button">
-              <i class="far fa-times"></i>
+              <form
+                action="{{item.product.get_remove_from_cart_url}}"
+                method="post"
+                class="remove-from-cart-btn-form"
+              >
+                {% csrf_token %}
+                <button type="submit" class="remove-from-cart-btn">
+                  <i class="far fa-times"></i>
+                </button>
+              </form>
             </div>
           </li>
-          <li class="clearfix">
-            <a href="#" class="widget-posts-img"
-              ><img
-                src="{% static 'images/shop/2.jpg' %}"
-                class="respimg"
-                alt=""
-            /></a>
-            <div class="widget-posts-descr">
-              <a href="#" title="">Gmag Merch Wallet</a>
-              <div class="widget-posts-descr_calc clearfix">
-                2 <span>x</span> $222
-              </div>
-            </div>
-            <div class="clear-cart_button">
-              <i class="fal fa-times"></i>
-            </div>
-          </li>
+          {% endfor %}
         </ol>
       </div>
     </div>
   </div>
   <div class="header-cart_wrap_total fl-wrap">
-    <div class="header-cart_wrap_total_item">Subtotal : <span>$1559</span></div>
+    <div class="header-cart_wrap_total_item">
+      Subtotal :
+      <span>${{cart_sum_total}}</span>
+    </div>
   </div>
   <div class="header-cart_wrap_footer fl-wrap">
-    <a href="cart.html"> View Cart</a>
-    <a href="checkout.html"> Checkout</a>
+    <a href="{% url 'shops:cart_view' %}"> View Cart</a>
+    <a href="{% url 'shops:place_order' %}"> Checkout</a>
   </div>
 </div>

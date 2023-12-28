@@ -1,13 +1,15 @@
 from .base import *
 
 
-# APPLICATIONS
+# APPLICATIONS | MY APPLICATIONS
 LOCAL_APPS = [
     "accounts",
     "lands",
     "posts",
     "editors",
+    "shop",
 ]
+# THIRD PARTY APPLICATION FOR MAKINGTHE DEVELOMENT A SUCCESS
 
 FRAMWORK_APPS = [
     "tinymce",
@@ -16,10 +18,11 @@ FRAMWORK_APPS = [
     "ckeditor_uploader",
 ]
 
+# APPEND THESE APPS TO THE INSTALLED APPS BY DJANGO
 INSTALLED_APPS += LOCAL_APPS
 INSTALLED_APPS += FRAMWORK_APPS
 
-
+# TINYMCE SETTINGS AND CONFIGARATIONS
 TINYMCE_COMPRESSOR = False
 TINYMCE_SPELLCHECKER = True
 TINYMCE_DEFAULT_CONFIG = {
@@ -38,7 +41,7 @@ TINYMCE_DEFAULT_CONFIG = {
    # To force a specific language instead of the Django current language.
 }
 
-
+# CKEDITOR SETTING ALSSO
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
 CKEDITOR_CONFIGS = {

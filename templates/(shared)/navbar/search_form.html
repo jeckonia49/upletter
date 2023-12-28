@@ -1,0 +1,13 @@
+<form action="{% url 'posts:post_search' %}" method="get">
+  <input
+    name="post_qs"
+    id="se"
+    type="text"
+    class="search"
+    placeholder="Search..."
+    value=""
+  />
+  <button class="search-submit" type="submit" id="submit_btn">
+    <i class="fa fa-search transition"></i>
+  </button>
+</form>

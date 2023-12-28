@@ -29,7 +29,6 @@ class MyUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-
 class MyUser(AbstractBaseUser):
     email = models.EmailField(
         verbose_name="email address",
@@ -64,7 +63,6 @@ class MyUser(AbstractBaseUser):
         # Simplest possible answer: All admins are staff
         return self.is_admin
 
-
 class Profile(models.Model):
     user = models.OneToOneField(
         MyUser, on_delete=models.CASCADE, related_name="user_profile"
@@ -98,24 +96,24 @@ class Profile(models.Model):
         return reverse("editors:editor_view", kwargs={"editor_username": self.get_username()})
     
     def get_social_links(self):
+        # this will return the social links
         return self.profile_social.all()
     
-
-
+    def get_cart_items(self):
+        # get all the users cart itmes
+        return self.profile_cart.filter(status="A").all()
+    
 class SocialPlatformIcon(models.TextChoices):
     IG = "IG", 'fa-instagram'
     FB = "FB", 'fa-facebook-f'
     TW = "TW", 'fa-twitter'
     LD = "LD", 'fa-linkedin'
 
-
 class SocialLink(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="profile_social")
     platform = models.CharField(max_length=100,unique=True, help_text="example facebook")
     link = models.URLField(max_length=255)
     icon = models.CharField(max_length=2, choices=SocialPlatformIcon.choices)
-
-
 
 @receiver(post_save, sender=MyUser)
 def profile_post_save_receiver(sender, instance, created, **kwargs):
