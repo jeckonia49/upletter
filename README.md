@@ -4,17 +4,17 @@
 
 ### git clone https://github.com/jeckonia49/upletter.git
 
-##### create .env and add SECRET_KEY=your secret key value
+##### create .env and add SECRET_KEY=`your_secret_key_value`
 
 ##### change the debug to True or create postgres database and then add the following to the
 
 #### .env file
 
-#### DATABASE_NAME=your_db_name
+#### DATABASE_NAME=`your_db_name`
 
-#### DATABASE_USER=your_db_user
+#### DATABASE_USER=`your_db_user`
 
-#### DATABASE_PASSWORD=your_db_password
+#### DATABASE_PASSWORD=`your_db_password`
 
 ## create a virtualenv
 
