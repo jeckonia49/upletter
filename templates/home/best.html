@@ -1,18 +1,25 @@
-{% load static %}
+{% load static %} {% load humanize %}
 
 <div class="col-md-8">
   <div class="main-container fl-wrap fix-container-init">
     <div class="section-title">
       <h2>Lastest World News</h2>
       <h4>Don't miss daily news</h4>
+      {% if ajax %}
       <div class="ajax-nav">
         <ul>
-          <li><a href="ajax/category1.html" class="current_page">World</a></li>
-          <li><a href="ajax/category2.html">Technology</a></li>
-          <li><a href="ajax/category3.html">Business</a></li>
-          <li><a href="ajax/category4.html">Sports</a></li>
+          {% for category in ajax %}
+          <li>
+            <a
+              href="{{category.get_ajax_absolute_url}}"
+              class="{% if forloop.counter|intword == 1 %}current_page{% endif %}"
+              >{{category.name}}</a
+            >
+          </li>
+          {% endfor %}
         </ul>
       </div>
+      {% endif %}
     </div>
     <div class="ajax-wrapper fl-wrap">
       <div class="ajax-loader">

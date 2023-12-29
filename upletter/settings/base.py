@@ -17,7 +17,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # will be turned oof on the sevrer
-DEBUG = False
+DEBUG = True
 
 # will add domain name, at now the asterick capture all the domain
 

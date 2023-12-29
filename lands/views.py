@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, View
-from posts.models import Post
+from posts.models import Post, Category, Genre
 from .mixins import HomeGridLandingMixin, HomeTopLandinMixin, PaginationMixin
 from .forms import ContactForm, SubscriptionForm
 from accounts.views import SuccessUrlRedirect
@@ -13,15 +13,20 @@ class HomeLandinView(HomeGridLandingMixin, HomeTopLandinMixin, TemplateView):
     """This form of inheritance makes this code easi to read and undersatand"""
     template_name = "index.html"
     queryset = Post
+    category=Category
 
     def get_main_hero(self, **kwargs):
         """main hero slider"""
         return self.queryset.objects.all().order_by("-timestamp")
     
+    def get_ajax_category(self, **kwargs):
+        return self.category.objects.all().order_by("?")[:4]
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         """The other grid posts are with tthe super dictionary"""
         context["main"] = self.get_main_hero(**kwargs)
+        context['ajax'] = self.get_ajax_category(**kwargs)
         return context
     
 class ContactUsView(SuccessUrlRedirect, View):
@@ -52,4 +57,7 @@ class SubscriptionView(SuccessUrlRedirect, View):
         messages.error(request, "Error subscription")
         return self.get_success_url(*args, **kwargs)
     
+
+def get_ajax_view(request, ajax_category_pk):
+    return render(request, "home/ajax/ajax.html", {"ajax_category": Category.objects.get(pk=ajax_category_pk)})
 

@@ -51,8 +51,13 @@ class Category(GenreCategoryAbstract):
     def get_post_related(self):
         return self.post_category.all().order_by("-id")
     
+    def get_ajax_related_posts(self):
+        return self.get_post_related()[:6]
+    
     def get_absolute_url(self):
         return reverse("posts:category_detail", kwargs={"category_slug": self.slug})
+    def get_ajax_absolute_url(self):
+        return reverse("ajax_category_view", kwargs={"ajax_category_pk": self.pk})
     
 class Tag(GenreCategoryAbstract):
     name = models.CharField(max_length=100, unique=True)
