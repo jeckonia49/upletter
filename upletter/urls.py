@@ -8,8 +8,8 @@ from . import views
 
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("myeditor/", lands_admin_site.urls),
+    path("super-admin-login/", admin.site.urls),
+    path("editor-admin-login/", lands_admin_site.urls),
     path("accounts/", include("accounts.urls", namespace="accounts")),
     path('tinymce/', include('tinymce.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
