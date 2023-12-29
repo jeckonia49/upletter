@@ -16,7 +16,6 @@ def get_cart_total_summation(request):
         #     for item in cart_items():
         #         if item.product.pk==
             # find all the prodcu based on the item count
-        print(pricing)
         item_list = Cart.objects.filter(
             buyer=request.user.user_profile, 
             status="A").all().select_related("product__pk").aggregate(Sum("item_count"))

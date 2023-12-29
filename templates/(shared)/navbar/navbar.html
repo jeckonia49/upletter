@@ -84,10 +84,18 @@
         <nav>
           <ul>
             <li>
-              <a href="{% url 'home' %}" class="act-link">Home</a>
+              <a
+                href="{% url 'home' %}"
+                class="{% if request.resolver_match.view_name == 'home' %}act-link{% endif %}"
+                >Home</a
+              >
             </li>
             <li>
-              <a href="{% url 'posts:posts' %}">News</a>
+              <a
+                href="{% url 'posts:posts' %}"
+                class="{% if request.resolver_match.view_name == 'posts:posts' %}act-link{% endif %}"
+                >News</a
+              >
             </li>
             {% if header_categories %}
             <!---->
@@ -101,11 +109,17 @@
             <!---->
             {% endif %}
             <li>
-              <a href="{% url 'shops:shop_view' %}">Shop</a>
+              <a
+                href="{% url 'shops:shop_view' %}"
+                class="{% if request.resolver_match.view_name == 'shops:shop_view' %}act-link{% endif %}"
+                >Shop</a
+              >
             </li>
             {% get_flatpages as flatpages %}
             <li>
-              <a href="#">More<i class="fas fa-caret-down"></i></a>
+              <a href="javascript:void(0)"
+                >More<i class="fas fa-caret-down"></i
+              ></a>
               <!--second level -->
               <ul>
                 {% for page in flatpages %}

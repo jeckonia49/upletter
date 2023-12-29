@@ -107,6 +107,10 @@ class Post(models.Model):
     def get_post_comment(self):
         return self.post_comment.all().order_by("-id")
     
+    def get_all_tags(self):
+        # return all tags
+        return self.tags.select_related().all()[:5]
+    
 class PostImageSlide(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="post_postimageslides")
     image = models.ImageField(upload_to="post/slides/")

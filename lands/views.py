@@ -59,5 +59,6 @@ class SubscriptionView(SuccessUrlRedirect, View):
     
 
 def get_ajax_view(request, ajax_category_pk):
+    """This function get the ajax"""
     return render(request, "home/ajax/ajax.html", {"ajax_category": Category.objects.get(pk=ajax_category_pk)})
 

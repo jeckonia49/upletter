@@ -8,5 +8,5 @@ urlpatterns = [
     path("<post_slug>/", views.EditorPrivateDeletePostView.as_view(), name="post_delete_view"),
     path("profile/update/", views.EditorUpdatePrivateView.as_view(), name="update"),
     path("profile/update/social/", views.SocialFormCreateView.as_view(), name="update-social"),
-    path("<editor_username>/", views.EditorPublicView.as_view(), name="editor_view"),
+    path("<editor_username>/public/view/", views.EditorPublicView.as_view(), name="editor_view"),
 ]

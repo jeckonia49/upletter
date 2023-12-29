@@ -51,7 +51,6 @@ class PostListView(PaginationMixin,SearchQueryView,CategoryMixin, TemplateView):
         """
         context = super().get_context_data(**kwargs)
         context['genres'] = self.get_all_genre()
-        print(self.get_search_query_term())
         return context
     
 class PostDetailView(ItemNextPrevMixin, CategoryMixin,ObjectMixin, TemplateView):
@@ -104,7 +103,6 @@ class PostDetailCommentCreateView(SuccessUrlRedirect, View):
             instance.post.save()
             form.save()
             messages.success(request, "Comment saved successfully")
-            print(form.cleaned_data)
             return self.get_success_url(**kwargs)
         messages.error(request, "Error commenting. Retry!")
         return self.get_success_url(**kwargs)
@@ -146,7 +144,6 @@ class CategoryPostListView(PaginationMixin,SearchQueryView, CategoryMixin, Templ
         """
         context = super().get_context_data(**kwargs)
         context['category'] = self.get_page_slug_url_field(**kwargs)
-        print(context)
         return context
         
 class PostListSearchView(PaginationMixin, TemplateView):

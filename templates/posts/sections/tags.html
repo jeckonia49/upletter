@@ -1,11 +1,14 @@
+{% if post.get_all_tags %}
 <div class="single-post-footer fl-wrap">
   <div class="post-single-tags">
-    <span class="tags-title"><i class="fas fa-tag"></i> Tags : </span>
+    <span class="tags-title"
+      ><i class="fas fa-tag"></i> Tag{{ post.get_all_tags.count|pluralize}} :
+    </span>
     <div class="tags-widget">
-      <a href="#">Science</a>
-      <a href="#">Technology</a>
-      <a href="#">Business</a>
-      <a href="#">Lifestyle</a>
+      {% for tag in post.get_all_tags %}
+      <a href="javascript:void(0)">{{tag.name|title}}</a>
+      {% endfor %}
     </div>
   </div>
 </div>
+{% endif %}
