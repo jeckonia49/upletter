@@ -16,6 +16,14 @@
 
 #### DATABASE_PASSWORD=your_db_password
 
+## create a virtualenv
+
+python -m venv `your_virtualenv_name`
+
+##
+
+pip install -r requirements.txt
+
 #### Admin login at super-admin-login/
 
 #### Editor login at editor-admin-login/
