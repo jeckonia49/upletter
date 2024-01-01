@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %}
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}Newzfox Administrator{% endblock title %}</title>
+
+    <link
+      rel="stylesheet"
+      href="{% static 'src/css' %}?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
+    />
+
+    <link
+      rel="stylesheet"
+      href="{% static 'src/plugins/fontawesome-free/css/all.min.css' %}"
+    />
+
+    <link
+      rel="stylesheet"
+      href="{% static 'src/plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}"
+    />
+
+    <link
+      rel="stylesheet"
+      href="{% static 'src/dist/css/adminlte.min.css' %}?v=3.2.0"
+    />
+  </head>
+  <body class="hold-transition login-page">
+    <div class="login-box">
+      <div class="login-logo">
+        <a href="{% url 'administrator:home' %}"><b>Newzfox</b></a>
+      </div>
+
+      {% block content %}{% endblock content %}
+    </div>
+
+    <script src="{% static 'src/plugins/jquery/jquery.min.js' %}"></script>
+
+    <script src="{% static 'src/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <script src="{% static 'src/dist/js/adminlte.min.js' %}?v=3.2.0"></script>
+  </body>
+</html>

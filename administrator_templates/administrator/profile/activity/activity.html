@@ -1,0 +1,59 @@
+{% load static %}
+
+<!---->
+{% for post in object_list %}
+<div class="post">
+  <div class="user-block">
+    <img
+      class="img-circle img-bordered-sm"
+      src="{% static 'src/dist/img/user1-128x128.jpg' %}"
+      alt="user image"
+    />
+    <span class="username">
+      <a href="{{post.profile.get_absolute_url}}"
+        >{{post.profile.get_full_name}}</a
+      >
+      <form
+        action="{% url 'administrator:test_cookie' post.profile.pk %}"
+        method="post"
+      >
+        {% csrf_token %}
+        <button type="submit" class="float-right btn-tool">
+          <i class="fas fa-times"></i>
+        </button>
+      </form>
+    </span>
+    <span class="description"
+      >Posted At - {{post.timestamp|timesince}} Ago</span
+    >
+  </div>
+
+  <p>{{post.summary|truncatewords:"35"}}</p>
+  <p>
+    <a href="#" class="link-black text-sm mr-2"
+      ><i class="fas fa-share mr-1"></i> Share</a
+    >
+    <a href="#" class="link-black text-sm"
+      ><i class="far fa-thumbs-up mr-1"></i> Like</a
+    >
+    <span class="float-right">
+      <a href="{{post.get_absolute_url}}" class="link-black text-sm">
+        <i class="far fa-comments mr-1"></i> Comments
+        ({{post.get_post_comment.count}})
+      </a>
+    </span>
+  </p>
+  <form
+    action="{% url 'administrator:post_comment_view' post.slug %}"
+    method="post"
+  >
+    {% csrf_token %}
+    <input
+      class="form-control form-control-sm py-2"
+      type="text"
+      name="post_comment"
+      placeholder="Type a comment and press enter to submit"
+    />
+  </form>
+</div>
+{% endfor %}

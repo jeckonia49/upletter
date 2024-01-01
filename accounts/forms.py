@@ -72,15 +72,16 @@ class RegisterModalForm(UserCreationForm):
         return self.cleaned_data.get("email")
     
 class ProfileForm(forms.ModelForm):
+    skills = forms.CharField(required=False, help_text="If multiple separate with commas")
 
     class Meta:
         model = Profile
         fields = ["bio","first_name","last_name"]
 
     widgets = {
-        "first_name":forms.TextInput(attrs={"placeholder": "First Name"}),
-        "last_name":forms.TextInput(attrs={"placeholder": "Last Name"}),
-        "bio":forms.Textarea(attrs={"placeholder": "More about you", "cols": "30", "rows": '3'}),
+        "first_name":forms.TextInput(attrs={"placeholder": "First Name", "class": "custom-control-input"}),
+        "last_name":forms.TextInput(attrs={"placeholder": "Last Name", "class": "custom-control-input"}),
+        "bio":forms.Textarea(attrs={"placeholder": "More about you", "cols": "30", "rows": '3', "class": "form-control", "id": "inputExperience"}),
     }
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

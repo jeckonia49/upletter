@@ -27,3 +27,7 @@ pip install -r requirements.txt
 #### Admin login at super-admin-login/
 
 #### Editor login at editor-admin-login/
+
+
+# STARTING THE ADVANCED VERSION OF THIS APP: RESTFRAMWEORK PART 
+

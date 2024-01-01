@@ -1,112 +1,44 @@
 {% load static %}
 
+<!---->
 <div class="video_carousel lightgallery">
   <div class="swiper-container">
     <div class="swiper-wrapper">
-      <!-- swiper-slide-->
-      <div class="swiper-slide">
-        <!-- video-item  -->
-        <div class="video-item fl-wrap">
-          <div class="video-item-img fl-wrap">
-            <img src="{% static 'images/all/1.jpg' %}" class="respimg" alt="" />
-            <a
-              class="play-icon image-popup"
-              href="https://www.youtube.com/watch?v=65YhmHsuD-M"
-              ><i class="fas fa-play"></i
-            ></a>
-          </div>
-          <div class="video-item-title">
-            <h4>
-              <a href="">London Stay Most Popular City</a>
-            </h4>
-            <span class="video-date"
-              ><i class="far fa-clock"></i> 05december 2021</span
-            >
-          </div>
-          <a class="post-category-marker" href="">Science</a>
-        </div>
-        <!--video-item end   -->
-      </div>
-      <!-- swiper-slide end-->
+      {% for video in videos %}
       <!-- swiper-slide-->
       <div class="swiper-slide">
         <!-- video-item  -->
         <div class="video-item fl-wrap">
           <div class="video-item-img fl-wrap">
             <img
-              src="{% static 'images/all/44.jpg' %}"
+              src="{% if video.cover %}{{video.cover.url}}{% else %}{% static 'images/all/1.jpg' %}{% endif %}"
               class="respimg"
               alt=""
             />
-            <a class="play-icon image-popup" href="https://vimeo.com/155428349"
+            <a class="play-icon image-popup" href="{{video.url}}"
               ><i class="fas fa-play"></i
             ></a>
           </div>
           <div class="video-item-title">
             <h4>
-              <a href="">Options, options: As clock ticks on, climate talks </a>
+              <a href="{{video.url}}" class="image-popup">{{video.title}}</a>
             </h4>
             <span class="video-date"
-              ><i class="far fa-clock"></i> 05december 2021</span
+              ><i class="far fa-clock"></i>
+              <!---->
+              {{video.timestamp|date:"jS F Y"}}</span
             >
           </div>
-          <a class="post-category-marker" href="">Business</a>
+          <a
+            class="post-category-marker"
+            href="{{video.category.get_absolute_url}}"
+            >{{video.category.name}}</a
+          >
         </div>
         <!--video-item end   -->
       </div>
       <!-- swiper-slide end-->
-      <!-- swiper-slide-->
-      <div class="swiper-slide">
-        <!-- video-item  -->
-        <div class="video-item fl-wrap">
-          <div class="video-item-img fl-wrap">
-            <img src="{% static 'images/all/2.jpg' %}" class="respimg" alt="" />
-            <a class="play-icon image-popup" href="https://vimeo.com/108359069"
-              ><i class="fas fa-play"></i
-            ></a>
-          </div>
-          <div class="video-item-title">
-            <h4>
-              <a href="">Efforts to cut car, plane and ship get small boost</a>
-            </h4>
-            <span class="video-date"
-              ><i class="far fa-clock"></i> 05december 2021</span
-            >
-          </div>
-          <a class="post-category-marker" href="">Science</a>
-        </div>
-        <!--video-item end   -->
-      </div>
-      <!-- swiper-slide end-->
-      <!-- swiper-slide-->
-      <div class="swiper-slide">
-        <!-- video-item  -->
-        <div class="video-item fl-wrap">
-          <div class="video-item-img fl-wrap">
-            <img
-              src="{% static 'images/all/46.jpg' %}"
-              class="respimg"
-              alt=""
-            />
-            <a
-              class="play-icon image-popup"
-              href="https://www.youtube.com/watch?v=s-TySen2xLo"
-              ><i class="fas fa-play"></i
-            ></a>
-          </div>
-          <div class="video-item-title">
-            <h4>
-              <a href=""> Climate change and your future health</a>
-            </h4>
-            <span class="video-date"
-              ><i class="far fa-clock"></i> 05december 2021</span
-            >
-          </div>
-          <a class="post-category-marker" href="">Technology</a>
-        </div>
-        <!--video-item end   -->
-      </div>
-      <!-- swiper-slide end-->
+      {% endfor %}
     </div>
   </div>
 </div>

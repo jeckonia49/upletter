@@ -10,13 +10,13 @@ class ModifiedLoginRequiredMixin(LoginRequiredMixin):
     """This inheritance will allow modification of the further class coc
         ill be using is here alot
         """
-    login_url = reverse_lazy(settings.LOGIN_URL)
+    login_url = "home"
 
     def dispatch(self, request, *args, **kwargs):
         """This is the class for the redirect"""
         if not request.user.is_authenticated:
-            messages.warning(request, "You have no permission to access this page")
-            return redirect("home")
+            messages.warning(request, "Seams like you are unauthoried")
+            return redirect(self.login_url)
         return super().dispatch(request, *args, **kwargs)
     
 class HandleProfileObjectMixin(TemplateView):

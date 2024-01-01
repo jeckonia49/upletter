@@ -1,0 +1,66 @@
+{% load static %}
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}Gmag Administrator{% endblock title %}</title>
+
+  <link
+    rel="stylesheet"
+    href="{% static 'src/css' %}?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
+  />
+
+  <link
+    rel="stylesheet"
+    href="{% static 'src/plugins/fontawesome-free/css/all.min.css' %}"
+  />
+
+  <link
+    rel="stylesheet"
+    href="{% static 'src/ionicons/2.0.1/css/ionicons.min.css' %}"
+  />
+
+  <link
+    rel="stylesheet"
+    href="{% static 'src/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css' %}"
+  />
+
+  <link
+    rel="stylesheet"
+    href="{% static 'src/plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}"
+  />
+
+  <link
+    rel="stylesheet"
+    href="{% static 'src/plugins/jqvmap/jqvmap.min.css' %}"
+  />
+
+  {% block css %}{% endblock css %}
+
+  <link
+    rel="stylesheet"
+    href="{% static 'src/dist/css/adminlte.min.css' %}?v=3.2.0"
+  />
+
+  <link
+    rel="stylesheet"
+    href="{% static 'src/plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}"
+  />
+
+  <link
+    rel="stylesheet"
+    href="{% static 'src/plugins/daterangepicker/daterangepicker.css' %}"
+  />
+
+  <link
+    rel="stylesheet"
+    href="{% static 'src/plugins/summernote/summernote-bs4.min.css' %}"
+  />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.css"
+  />
+  <!--=============== favicons ===============-->
+  <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
+</head>

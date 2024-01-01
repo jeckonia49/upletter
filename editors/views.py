@@ -1,3 +1,5 @@
+from typing import Any
+from django.http.response import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import TemplateView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -7,10 +9,11 @@ from lands.mixins import   PaginationMixin
 from .mixins import ModifiedLoginRequiredMixin, HandleProfileObjectMixin
 from accounts.forms import ProfileForm, SocialProfileForm, socialFormSet
 from accounts.views import SuccessUrlRedirect
-from django.http import HttpResponseRedirect
+from django.http import HttpRequest, HttpResponseRedirect
 from lands.mixins import ObjectMixin
 from django.contrib.auth import get_user
 from django.contrib import messages
+from django.contrib.auth.mixins import UserPassesTestMixin
 
 
 class EditorPublicView(PaginationMixin, TemplateView):
@@ -31,10 +34,22 @@ class EditorPublicView(PaginationMixin, TemplateView):
         context['editor'] = self.get_profile(**kwargs)
         return context
 
-class EditorPrivateView(ModifiedLoginRequiredMixin, HandleProfileObjectMixin):
+class EditorPrivateView(ModifiedLoginRequiredMixin, UserPassesTestMixin,HandleProfileObjectMixin):
     """This is the main class to be passed on to the views"""
     template_name = "editors/profile/index.html"
     profile = Profile
+
+    def test_func(self, **kwargs):
+        # get the profile user as a superuser, this is to allow for the access of the 
+        # modified superuser|administartor view
+        return self.get_profile(**kwargs).user.is_admin
+    
+    def get_context_data(self, **kwargs):
+        # update the context to be able to get the test
+        context = super().get_context_data(**kwargs)
+        context['is_administrator'] = self.test_func(**kwargs)
+        return context
+    
 
 # create a view for the deletion of the post by the writer from the frontend
 class EditorPrivateDeletePostView(

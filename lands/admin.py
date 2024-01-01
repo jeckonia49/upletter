@@ -1,9 +1,10 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from lands.models import ContactFlatPage, Contact, SiteSocialLink, Subscription, TinymceApiKey,  ContactFlatPage, AboutFlatPage, Page404Error
+from django.core.exceptions import ValidationError
 # Define a new FlatPageAdmin
 
-from posts.models import Post
+from posts.models import Post, Video
 
 
 @admin.register(Contact)
@@ -73,3 +74,13 @@ class PostAdmin(admin.ModelAdmin):
     
 lands_admin_site.register(Post, PostAdmin)
 
+
+
+class AdminVideo(admin.ModelAdmin):
+    list_display = ["category","title","cover","url","timestamp"]
+    prepopulated_fields = {"slug": ("title", )}
+    search_fields = ['title']
+
+
+
+lands_admin_site.register(Video, AdminVideo)

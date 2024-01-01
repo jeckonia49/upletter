@@ -21,7 +21,7 @@ class LoginView(View,SuccessUrlRedirect):
             user = authenticate(request, username=form.cleaned_email(), password=form.cleaned_password())
             if user is not None:
                 login(request, user)
-                messages.success(request, "Login Successful")
+                messages.success(request, "Your Login was Successful ")
                 return self.get_success_url(*args, **kwargs)
         messages.error(request, "Invalid user credetials")
         return self.get_success_url(*args, **kwargs)

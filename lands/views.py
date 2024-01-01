@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, View
-from posts.models import Post, Category, Genre
+from posts.models import Post, Category, Genre, Video
 from .mixins import HomeGridLandingMixin, HomeTopLandinMixin, PaginationMixin
 from .forms import ContactForm, SubscriptionForm
 from accounts.views import SuccessUrlRedirect
 from django.contrib import messages
 from .models import Subscription
+from django.utils import timezone
+from datetime import timedelta
 # Create your views here.
 
 class HomeLandinView(HomeGridLandingMixin, HomeTopLandinMixin, TemplateView):
@@ -14,6 +16,7 @@ class HomeLandinView(HomeGridLandingMixin, HomeTopLandinMixin, TemplateView):
     template_name = "index.html"
     queryset = Post
     category=Category
+    videos = Video
 
     def get_main_hero(self, **kwargs):
         """main hero slider"""
@@ -22,11 +25,18 @@ class HomeLandinView(HomeGridLandingMixin, HomeTopLandinMixin, TemplateView):
     def get_ajax_category(self, **kwargs):
         return self.category.objects.all().order_by("?")[:4]
     
+    def get_recent_timing(self):
+        return timezone.now()-timedelta(days=5)
+    
+    def get_popular_recent_videos(self):
+        return self.videos.objects.filter(timestamp__gte=self.get_recent_timing()).all()
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         """The other grid posts are with tthe super dictionary"""
         context["main"] = self.get_main_hero(**kwargs)
         context['ajax'] = self.get_ajax_category(**kwargs)
+        context['videos'] = self.get_popular_recent_videos()
         return context
     
 class ContactUsView(SuccessUrlRedirect, View):

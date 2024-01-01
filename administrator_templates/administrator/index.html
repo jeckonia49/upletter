@@ -1,0 +1,107 @@
+{% extends "administrator/base.html" %} {% load static %} {% load humanize %}
+<!--  -->
+{% block title %}{{ block.super }} {% endblock title %}
+<!--  -->
+{% block css %}
+<link
+  rel="stylesheet"
+  href="{% static 'src/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}"
+/>
+<link
+  rel="stylesheet"
+  href="{% static 'src/plugins/datatables-responsive/css/responsive.bootstrap4.min.css' %}"
+/>
+<link
+  rel="stylesheet"
+  href="{% static 'src/plugins/datatables-buttons/css/buttons.bootstrap4.min.css' %}"
+/>
+{% endblock css %}
+
+<!--  -->
+{% block content %}
+
+<div class="row">
+  {% if posts %}
+  <div class="col-lg-3 col-6">
+    <div class="small-box bg-info">
+      <div class="inner">
+        <h3>{{posts.count}}</h3>
+        <p>Post{{posts.count|pluralize}}</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-pie-graph"></i>
+      </div>
+      <a href="javascript:void(0)" class="small-box-footer"
+        >More info <i class="fas fa-arrow-circle-right"></i
+      ></a>
+    </div>
+  </div>
+  {% endif %}
+  <!---->
+  <!---->
+  {% if users %}
+  <div class="col-lg-3 col-6">
+    <div class="small-box bg-warning">
+      <div class="inner">
+        <h3>{{users.count|intword}}</h3>
+        <p>Active User{{users.count|pluralize}}</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-person-add"></i>
+      </div>
+      <a href="javascript:void(0)" class="small-box-footer"
+        >More info <i class="fas fa-arrow-circle-right"></i
+      ></a>
+    </div>
+  </div>
+  {% endif %}
+
+  <!---->
+
+  <div class="col-lg-3 col-6">
+    <div class="small-box bg-success">
+      <div class="inner">
+        <h3>45<sup style="font-size: 20px"></sup></h3>
+        <p>Active User</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-stats-bars"></i>
+      </div>
+      <a href="javascript:void(0)" class="small-box-footer"
+        >More info <i class="fas fa-arrow-circle-right"></i
+      ></a>
+    </div>
+  </div>
+
+  <div class="col-lg-3 col-6">
+    <div class="small-box bg-danger">
+      <div class="inner">
+        <h3>{{shops.count}}</h3>
+        <p>Shop</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-bag"></i>
+      </div>
+      <a href="javascript:void(0)" class="small-box-footer"
+        >More info <i class="fas fa-arrow-circle-right"></i
+      ></a>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <!--Posts-->
+  {% include "administrator/site/home/cards/posts.html" %}
+  <!--Shops-->
+  {% include "administrator/site/home/cards/shops.html" %}
+</div>
+{% endblock content %}
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+{% block script %}
+<!--  -->
+{% include "administrator/site/scripts/data_table.html" %}
+<!--  -->
+{% endblock script %}

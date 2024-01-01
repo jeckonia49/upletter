@@ -19,7 +19,7 @@ class MyUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, password=None):
+    def create_superuser(self, email, password=None, **kwargs):
         """
         Creates and saves a superuser with the given email, date of
         birth and password.
@@ -74,6 +74,7 @@ class Profile(models.Model):
     bio = models.TextField(max_length=5000)
     first_name = models.CharField(max_length=100, null=True, blank=True)
     last_name = models.CharField(max_length=100, null=True, blank=True)
+    skills = models.CharField(max_length=300, blank=True, null=True, help_text="if multiple skills, separate with commas")
 
     def __str__(self):
         return self.user.email

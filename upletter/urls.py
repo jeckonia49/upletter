@@ -8,8 +8,8 @@ from . import views
 
 
 urlpatterns = [
-    path("super-admin-login/", admin.site.urls),
-    path("editor-admin-login/", lands_admin_site.urls),
+    path("super-admin/", admin.site.urls),
+    path("editor-admin/", lands_admin_site.urls),
     path("accounts/", include("accounts.urls", namespace="accounts")),
     path('tinymce/', include('tinymce.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
@@ -17,6 +17,9 @@ urlpatterns = [
     path("posts/", include("posts.urls", namespace="posts")),
     path("editors/", include("editors.urls", namespace="editors")),
     path("shops/", include("shop.urls", namespace="shops")),
+    path("administrator/", include("administrator.urls", namespace="administrator")),
+    path("api/v1/", include("apis.urls")),
+    path('api-auth/', include('rest_framework.urls')),
 ]
 
 

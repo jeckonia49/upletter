@@ -58,7 +58,12 @@ ROOT_URLCONF = "upletter.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],
+        "DIRS": [
+            # frontend templates
+            BASE_DIR / "templates",
+            # administrtor templates
+            BASE_DIR / "administrator_templates",
+            ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -73,35 +78,42 @@ TEMPLATES = [
                 # app context processors
                 "posts.context_processor.post_context_processor_data",
                 "shop.context_processor.shop_context_processor_data",
+                "administrator.context_processor.get_administrator_context",
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = "upletter.wsgi.application"
+ASGI_APPLICATION = "upletter.asgi.application"
 
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-if DEBUG: # use sqlite in development when the debug is off that is
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
-        }
-    }
-else: # use postrgres ion production when the debug is off that is
-    DATABASES = {
+# if DEBUG: # use sqlite in development when the debug is off that is
+#     DATABASES = {
+#         "default": {
+#             "ENGINE": "django.db.backends.sqlite3",
+#             "NAME": BASE_DIR / "db.sqlite3",
+#         }
+#     }
+# else: # use postrgres ion production when the debug is off that is
+#     DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": os.environ.get("DATABASE_NAME"),
+#         "USER": os.environ.get("DATABASE_USER"),
+#         "PASSWORD": os.environ.get("DATABASE_PASSWORD"),
+#         "HOST": "",
+#     }
+# }
+DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("DATABASE_NAME"),
-        "USER": os.environ.get("DATABASE_USER"),
-        "PASSWORD": os.environ.get("DATABASE_PASSWORD"),
-        "HOST": "",
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
@@ -140,11 +152,15 @@ STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
-STATICFILES_DIRS = [BASE_DIR / "static"]
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    ]
 
 
 LOGIN_URL="accounts:login"
 LOGOUT_URL="accounts:logout"
+
+ADMINISTRATOR_LOGIN_URL="administrator:login"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

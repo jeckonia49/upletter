@@ -6,6 +6,7 @@ from django.db.models import Avg, Sum, F, Q, Max
 from django.urls import reverse
 from lands.models import ItemThreeAbstractModel
 from ckeditor.fields import RichTextField
+from django.core.exceptions import ValidationError
 
 class CategoryIcon(models.TextChoices):
     FA_PODIUM = "F_PODIUM", "fa-podium"
@@ -121,3 +122,17 @@ class PostImageSlide(models.Model):
 class PostComment(ItemThreeAbstractModel):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="post_comment")
 
+class Video(models.Model):
+    category=models.ForeignKey(Category, on_delete=models.CASCADE, related_name="category_videos")
+    title = models.CharField(max_length=100, unique=True)
+    slug = models.SlugField(max_length=100)
+    cover = models.ImageField(upload_to="videos/",blank=True, null=True)
+    url = models.URLField(max_length=500)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+    
+    
+
+    

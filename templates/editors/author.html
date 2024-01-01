@@ -44,6 +44,12 @@
               <span>settings:</span>
               <a href="{% url 'editors:update' %}">Update Profile</a>
             </li>
+            {% endif %} {% if is_administrator %}
+            <hr />
+            <li>
+              <span>Administration:</span>
+              <a href="{% url 'administrator:home' %}">Aministrator</a>
+            </li>
             {% endif %}
           </ul>
         </div>

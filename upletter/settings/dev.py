@@ -8,6 +8,9 @@ LOCAL_APPS = [
     "posts",
     "editors",
     "shop",
+    "chats",
+    "apis",
+    "administrator",
 ]
 # THIRD PARTY APPLICATION FOR MAKINGTHE DEVELOMENT A SUCCESS
 
@@ -16,11 +19,20 @@ FRAMWORK_APPS = [
     "corsheaders",
     "ckeditor",
     "ckeditor_uploader",
+    "rest_framework",
+    # TODO: ADD THE BOT LATER
+    # "chatterbot.ext.django_chatterbot",
+    # add django channels
+    'channels' , 
+     # Third-party apps
+    # "tailwind",
+    # "theme",
 ]
 
 # APPEND THESE APPS TO THE INSTALLED APPS BY DJANGO
 INSTALLED_APPS += LOCAL_APPS
 INSTALLED_APPS += FRAMWORK_APPS
+INSTALLED_APPS.insert(0,'daphne') 
 
 # TINYMCE SETTINGS AND CONFIGARATIONS
 TINYMCE_COMPRESSOR = False
@@ -68,3 +80,25 @@ DEFAULT_FROM_EMAIL=os.environ.get("GOOGLE_EMAIL_EMAIL_APP")
 EMAIL_HOST_USER=os.environ.get("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD=os.environ.get("GOOGLE_EMAIL_APP_PASSWORD")
 
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        'rest_framework.permissions.AllowAny',
+    ]
+}
+
+
+# TAILWIND_APP_NAME="theme"
+
+
+
+# Chatterbot
+# CHATTERBOT = {
+#     "name": "User Support Bot",
+#     "logic_adapters": [
+#         "chatterbot.logic.BestMatch",
+#     ],
+# }

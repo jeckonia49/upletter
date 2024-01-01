@@ -2,6 +2,7 @@
 <!---->
 {% load static %}
 <!---->
+{% block title %} {{ block.super }} | contact us {% endblock title %}
 <!---->
 
 {% block content %}
@@ -55,26 +56,21 @@
           </li>
         </ul>
         <!--card-item end -->
+
+        {% if site_social %}
         <div class="contact-social fl-wrap">
           <span class="cs-title">Find us on: </span>
           <ul>
+            {% for link in site_social %}
             <li>
-              <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+              <a href="//{{link.link}}" target="_blank"
+                ><i class="fab {{link.get_icon_display}}"></i
+              ></a>
             </li>
-            <li>
-              <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-            </li>
-            <li>
-              <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-            </li>
-            <li>
-              <a href="#" target="_blank"><i class="fab fa-vk"></i></a>
-            </li>
-            <li>
-              <a href="#" target="_blank"><i class="fab fa-pinterest-p"></i></a>
-            </li>
+            {% endfor %}
           </ul>
         </div>
+        {% endif %}
         <!-- box-widget -->
         {% include "shop/shop.html" %}
         <!-- box-widget  end -->

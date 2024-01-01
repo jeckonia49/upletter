@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import (
-    Genre, Category, Tag,Post, PostImageSlide, PostComment
+    Genre, Category, Tag,Post, PostImageSlide, PostComment, Video
 )
 
 @admin.register(Genre)
@@ -59,3 +59,8 @@ class AdminPostComment(admin.ModelAdmin):
     )
     
 
+@admin.register(Video)
+class AdminVideo(admin.ModelAdmin):
+    list_display = ["category","title","cover","url","timestamp"]
+    prepopulated_fields = {"slug": ("title", )}
+    search_fields = ['title']
